@@ -1,7 +1,5 @@
 categories: ["cs.CV", "cs.LG", "cs.AI"]
 keywords:
-  - "open vocabulary"
-  - "open vocabulary segmentation"
   - "affordance segmentation"
   - "affordance grounding"
   - "dinov3"
