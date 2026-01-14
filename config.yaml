@@ -3,7 +3,7 @@ keywords:
   - "affordance segmentation"
   - "affordance grounding"
   # - "dinov3"
-  # - "CLIP"
+  - "CLIP"
 
 exclude_keywords: # 选择排除的关键词
   - "3D"
