@@ -4,6 +4,7 @@ keywords:
   - "affordance grounding"
   # - "dinov3"
   - "CLIP"
+  - "text prompt"
 
 exclude_keywords: # 选择排除的关键词
   - "3D"
