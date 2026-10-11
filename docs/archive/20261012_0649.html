@@ -1,0 +1,1039 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>arXiv 论文速递</title><style>
+:root {
+  --bg:#f8fafc; --card:#ffffff; --text:#0f172a; --muted:#667085; --border:#e5e7eb; --acc:#2563eb;
+}
+:root[data-theme="dark"] {
+  --bg:#0b0f17; --card:#111827; --text:#e5e7eb; --muted:#9ca3af; --border:#1f2937; --acc:#2563eb;
+}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);
+  font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.6;}
+.container{max-width:900px;margin:0 auto;padding:18px;}
+.header{display:flex;gap:10px;justify-content:space-between;align-items:center;margin:8px 0 16px;flex-wrap:wrap}
+h1{font-size:22px;margin:0}
+.badge{font-size:12px;color:#111827;background:var(--acc);padding:2px 8px;border-radius:999px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 18px;margin:14px 0;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.title{font-weight:700;margin:0 0 6px 0;font-size:18px}
+.meta-line{color:var(--muted);font-size:13px;margin:2px 0}
+.links a{color:var(--acc);text-decoration:none;margin-right:12px}
+.detail{margin-top:10px;background:rgba(2,6,23,.03);border:1px solid var(--border);border-radius:10px;padding:8px 10px}
+summary{cursor:pointer;color:var(--acc)}
+.mono{white-space:pre-wrap;background:rgba(2,6,23,.03);border:1px solid var(--border);padding:10px;border-radius:10px}
+.row{display:grid;grid-template-columns:1fr;gap:12px}
+@media (min-width: 860px) {
+  .row-2{grid-template-columns:1fr 1fr}
+}
+.footer{color:var(--muted);font-size:13px;margin:20px 0 10px}
+.hr{height:1px;background:var(--border);margin:14px 0}
+.history-list a{display:block;color:var(--acc);text-decoration:none;margin:4px 0}
+.controls{display:flex;gap:8px;align-items:center}
+.btn{border:1px solid var(--border);background:var(--card);padding:6px 10px;border-radius:10px;cursor:pointer;color:var(--text)}
+.btn:hover{border-color:var(--acc)}
+</style>
+<script>
+(function() {
+  const root = document.documentElement;
+  function apply(t) {
+    if (t==='dark') root.setAttribute('data-theme','dark');
+    else if (t==='light') root.removeAttribute('data-theme');
+    else {
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
+        root.setAttribute('data-theme','dark');
+      else root.removeAttribute('data-theme');
+    }
+  }
+  let t = localStorage.getItem('theme') || 'light';
+  if (!['light','dark','auto'].includes(t)) t='light';
+  apply(t);
+  window.__toggleTheme = function() {
+    let cur = localStorage.getItem('theme') || 'light';
+    if (cur==='light') cur='dark';
+    else if (cur==='dark') cur='auto';
+    else cur='light';
+    localStorage.setItem('theme', cur);
+    apply(cur);
+    const el=document.getElementById('theme-label');
+    if(el) el.textContent = cur.toUpperCase();
+  }
+  window.__expandAll = function(open) {
+    document.querySelectorAll('details').forEach(d => d.open = !!open);
+  }
+})();
+</script>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>arXiv 论文速递</h1>
+      <div style="display:flex;gap:10px;align-items:center">
+        
+<div class="controls">
+  <button class="btn" onclick="__toggleTheme()">Theme: <span id="theme-label" style="margin-left:6px">AUTO</span></button>
+  <button class="btn" onclick="__expandAll(true)">Expand All</button>
+  <button class="btn" onclick="__expandAll(false)">Collapse All</button>
+</div>
+
+        <span class="badge">2026-10-12 06:49</span>
+      </div>
+    </div>
+    <div class="hr"></div>
+    <div>Snapshot: 20261012_0649</div>
+    <div class="row"><div class="card">
+<div class="title">Dex-One2Many: Learning Dexterous Manipulation from a Single Human Demonstration</div>
+<div class="meta-line">Authors: Jusuk Lee, Sungha Kim, Yeonsoo Park, Jonguk Cheon, Yoonkyo Jung, Yongjun You, H. Jin Kim, Jia-Bin Huang, Furong Huang, Youngseok Jang, Seungjae Lee</div>
+<div class="meta-line">First: 2026-10-08T17:59:58+00:00 · Latest: 2026-10-08T17:59:58+00:00</div>
+<div class="meta-line">Comments: Project page: https://dex-one2many.github.io/</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.12470v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.12470v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a> · <a href="https://dex-one2many.github.io/">Project1</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">While learning dexterous manipulation from a single human video offers a promising alternative to costly robot demonstrations, many recent methods predominantly imitate demonstrated motions. Such strict motion matching often limits generalization to initial object poses, goal poses, and grasps not shown in the video. Alternatively, discovering a policy via reinforcement learning (RL) allows for broad generalization, but without prior guidance, it struggles with high-dimensional exploration in complex, multi-stage tasks. To address these coupled generalization and exploration challenges, we present Dex-One2Many, a real-to-sim-to-real framework that learns a generalizable dexterous manipulation policy from a single human video. Our key insight is to abstract the video into sequential scene graphs that guide RL, enabling efficient exploration while preserving broad generalizability. The graphs serve as generative constraints for sampling diverse reset states and provide dense rewards for each stage. Because the graphs constrain relations rather than exact poses, these reset states cover object poses and grasps beyond the video, while initializing each stage from them with dense rewards keeps exploration short and guided. Trained entirely in simulation, Dex-One2Many transfers zero-shot to a real multi-fingered hand. Across five tool-use and manipulation tasks, Dex-One2Many exceeds baselines by 6.5% in seen configurations, while its robust generalization widens this gap to 71% in unseen scenarios.</div></details>
+<details class="detail"><summary>中文标题/摘要</summary>
+<div class="mono"><b>标题：</b>Dex-One2Many：从单一人类示范学习灵巧操作</div>
+<div class="mono" style="margin-top:8px">从单一人类视频学习灵巧操作为昂贵的机器人示范提供了有前景的替代方案，但许多近期方法主要模仿示范的动作。这种严格的动作匹配往往限制了对初始物体姿态、目标姿态和视频中未展示的抓取的泛化。相反，通过强化学习（RL）发现策略可以实现广泛的泛化，但在没有先前指导的情况下，它在复杂的多阶段任务中面临高维探索的挑战。为了解决这些耦合的泛化和探索问题，我们提出了Dex-One2Many，一个从单一人类视频学习可泛化灵巧操作策略的真实-模拟-真实框架。我们的关键见解是将视频抽象为顺序场景图，以指导RL，促进高效探索，同时保持广泛的泛化能力。这些图作为生成约束，用于采样多样的重置状态，并为每个阶段提供密集奖励。由于这些图约束关系而非精确姿态，这些重置状态覆盖了视频之外的物体姿态和抓取，同时从这些状态初始化每个阶段并提供密集奖励，使探索保持简短且有指导性。Dex-One2Many完全在模拟中训练，能够零-shot转移到真实的多指手。在五个工具使用和操作任务中，Dex-One2Many在已见配置中超越基线6.5%，而其强大的泛化能力在未见场景中将这一差距扩大到71%。</div>
+</details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">The motivation behind this research is to improve dexterous manipulation learning from a single human demonstration, addressing limitations in generalization and exploration faced by existing methods. The authors propose Dex-One2Many, a real-to-sim-to-real framework that utilizes sequential scene graphs to guide reinforcement learning, allowing for efficient exploration and broad generalization of manipulation policies. Experimental results show that Dex-One2Many outperforms baseline methods by 6.5% in familiar configurations and achieves a 71% improvement in generalization for unseen scenarios across five tool-use and manipulation tasks.</div>
+<div class="mono" style="margin-top:8px">本研究的动机是改善从单一人类示范中学习灵巧操作的能力，解决现有方法在泛化和探索方面的局限性。作者提出了Dex-One2Many，这是一种真实到仿真再到真实的框架，利用顺序场景图来指导强化学习，从而实现高效探索和广泛泛化。实验结果表明，Dex-One2Many在已知配置中比基线方法提高了6.5%，并在五个工具使用和操作任务中，在未知场景的泛化能力上实现了显著的71%的提升。</div>
+</details>
+</div>
+<div class="card">
+<div class="title">Rubric-CEPR: Self-Evolving Image Editing via Reward-Verified Self-Distillation</div>
+<div class="meta-line">Authors: Ritesh Thawkar, Shubham Patle, Shravan Venkatraman, Rao Muhammad Anwer</div>
+<div class="meta-line">First: 2026-10-08T17:59:58+00:00 · Latest: 2026-10-08T17:59:58+00:00</div>
+<div class="meta-line">Comments: Project Page: $\href{https://riteshthawkar.github.io/Rubric-CEPR/}{\text{this URL}}$</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.12469v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.12469v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a> · <a href="https://riteshthawkar.github.io/Rubric-CEPR/}{\text{this">Project1</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Instruction-guided image editors have become highly capable, yet improving them further still depends on human-edited training pairs or external reward models. Such supervision is costly to obtain and can reward plausible failures: a realistic output may leave the requested change undone or alter content that should be preserved. In this work, we strive to improve a pretrained image editor using only its own generations, without human-edited targets or an external training-time reward model. To this end, we propose a self-evolving framework, named Rubric-CEPR, that verifies the editor&#x27;s own samples with its internal representations through a rubric-augmented Contrastive Edit-Preservation Reward (CEPR). A Planner proposes structured edit instructions from unlabeled images, the Editor samples multiple candidate edits, and a frozen Critic scores each candidate with decomposed rubric checks for edit realization, removal of the old state, and content preservation, using features already exposed by the editor. Non-compensatory gates reject infeasible candidates, and the best verified candidate is distilled into the editor through lightweight adapter training. On Qwen-Image-Edit, Rubric-CEPR improves ImgEdit from 4.36 to 4.60 (+5.5%), with a +24.9% gain on object isolation, and transfers to GEdit-Bench and Complex-Edit. The same procedure also improves Step1X-Edit by +7.8% on ImgEdit. We hope our approach will serve as a solid baseline for image editors that improve themselves from their own verified samples. Our code is publicly available at $\href{https://riteshthawkar.github.io/Rubric-CEPR/}{\text{this URL}}$</div></details>
+<details class="detail"><summary>中文标题/摘要</summary>
+<div class="mono"><b>标题：</b>Rubric-CEPR：通过奖励验证的自我蒸馏自我演化图像编辑</div>
+<div class="mono" style="margin-top:8px">受指导的图像编辑器已变得非常强大，但进一步改进仍然依赖于人工编辑的训练对或外部奖励模型。这种监督获取成本高昂，并可能奖励合理的失败：现实的输出可能未能完成请求的更改，或改变应保留的内容。在这项工作中，我们努力仅使用编辑器自身的生成来改进预训练的图像编辑器，而不依赖人工编辑的目标或外部训练时的奖励模型。为此，我们提出了一种自我演化框架，称为Rubric-CEPR，通过增强的对比编辑保留奖励（CEPR）验证编辑器自身的样本与其内部表示。规划者从未标记的图像中提出结构化编辑指令，编辑器采样多个候选编辑，冻结的评论者通过分解的标准检查对每个候选进行评分，以实现编辑、移除旧状态和内容保留，使用编辑器已暴露的特征。非补偿性门拒绝不可行的候选，最佳验证候选通过轻量适配器训练蒸馏到编辑器中。在Qwen-Image-Edit上，Rubric-CEPR将ImgEdit从4.36提高到4.60（+5.5%），在对象隔离上获得+24.9%的提升，并转移到GEdit-Bench和Complex-Edit。同样的程序也使Step1X-Edit在ImgEdit上提高了+7.8%。我们希望我们的方法能为从自身验证样本中自我改进的图像编辑器提供一个坚实的基线。我们的代码在$\href{https://riteshthawkar.github.io/Rubric-CEPR/}{\text{此URL}}$上公开可用。</div>
+</details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">The motivation behind this research is to enhance instruction-guided image editors without relying on costly human-edited training pairs or external reward models, which can lead to unrealistic outputs. The authors propose a self-evolving framework called Rubric-CEPR that utilizes the editor&#x27;s own generated samples, employing a rubric-augmented Contrastive Edit-Preservation Reward (CEPR) to verify these samples through internal representations. Experimental results show that Rubric-CEPR improves the performance of ImgEdit from 4.36 to 4.60, representing a 5.5% increase, along with a 24.9% improvement in object isolation, and also enhances Step1X-Edit by 7.8% on ImgEdit, indicating the framework&#x27;s effectiveness in self-improvement using verified samples.</div>
+<div class="mono" style="margin-top:8px">本研究的动机是提升基于指令的图像编辑器，而不依赖于昂贵的人为编辑训练对或外部奖励模型，这些模型可能导致不现实的输出。作者提出了一种自我演化框架Rubric-CEPR，该框架利用编辑器自身生成的样本和内部表示，通过增强的对比编辑保持奖励（CEPR）来验证样本。实验结果表明，Rubric-CEPR将ImgEdit的性能从4.36提高到4.60，提升幅度为5.5%，同时在物体隔离方面获得了24.9%的增益，并成功将改进转移到其他模型如GEdit-Bench和Complex-Edit，同时将Step1X-Edit提升了7.8%。</div>
+</details>
+</div>
+<div class="card">
+<div class="title">DreamTrue: Action-Faithful Robot World Model with Counterfactual Post-Training</div>
+<div class="meta-line">Authors: Junyan Li, Ruizhi Li, Yu Liu, Xiangshuo Liu, Mingchao Sun, Hongyu Pan, Mu Xu, Lue Fan, Zhaoxiang Zhang</div>
+<div class="meta-line">First: 2026-10-08T17:59:51+00:00 · Latest: 2026-10-08T17:59:51+00:00</div>
+<div class="meta-line">Comments: project page: https://brave-eai.github.io/DreamTrue; code: https://github.com/brave-eai/DreamTrue</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.12468v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.12468v1">PDF</a> · <a href="https://github.com/brave-eai/DreamTrue">Code1</a> · <a href="https://huggingface.co/huggingface">Code2</a> · <a href="https://huggingface.co/docs/hub/spaces">Code3</a> · <a href="https://brave-eai.github.io/DreamTrue">Project1</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">We present DreamTrue, a multi-view, cross-embodiment robot world model for action-faithful and physically plausible video prediction. Training such a model on existing robot datasets faces two obstacles: imprecise calibration can impair action following, while limited coverage of unsuccessful interactions can bias predictions toward successful outcomes. To improve action following across embodiments, we render action trajectories into image-space conditions and introduce offline geometric calibration to align these conditions with the target videos. To broaden interaction coverage, we introduce counterfactual post-training, modifying recorded action trajectories and generating future videos under a wider range of actions and contact configurations. To provide feedback on these predictions without paired ground-truth futures, we construct a human-annotated video dataset covering robot, object, and interaction defects and use it to train an embodied video reward model. Its scores guide reinforcement-learning post-training toward more physically plausible interaction outcomes. On AgiBot, DreamTrue attains state-of-the-art action following, while reducing the human-assessed interaction defect rate from from 48.12% to 6.25%. Notably, our model ranks first in the world model track of the AgiBot World Challenge 2026. The project page can be found at https://brave-eai.github.io/DreamTrue.</div></details>
+<details class="detail"><summary>中文标题/摘要</summary>
+<div class="mono"><b>标题：</b>DreamTrue：具有反事实后训练的动作忠实机器人世界模型</div>
+<div class="mono" style="margin-top:8px">我们提出了DreamTrue，一个多视角、跨体现的机器人世界模型，用于动作忠实和物理可信的视频预测。在现有机器人数据集上训练这样的模型面临两个障碍：不精确的校准会影响动作跟随，而有限的失败交互覆盖会使预测偏向成功结果。为了改善跨体现的动作跟随，我们将动作轨迹渲染为图像空间条件，并引入离线几何校准以将这些条件与目标视频对齐。为了扩大交互覆盖，我们引入反事实后训练，修改记录的动作轨迹，并在更广泛的动作和接触配置下生成未来视频。为了在没有配对真实未来的情况下对这些预测提供反馈，我们构建了一个涵盖机器人、物体和交互缺陷的人类标注视频数据集，并利用它训练一个具体现身的视频奖励模型。其得分指导强化学习后训练朝向更物理可信的交互结果。在AgiBot上，DreamTrue实现了最先进的动作跟随，同时将人类评估的交互缺陷率从48.12%降低到6.25%。值得注意的是，我们的模型在2026年AgiBot世界挑战赛的世界模型赛道中排名第一。项目页面可在https://brave-eai.github.io/DreamTrue找到。</div>
+</details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">The research motivation behind DreamTrue is to develop a robot world model that ensures action-faithful and physically plausible video predictions, addressing challenges such as imprecise calibration and limited interaction coverage in existing datasets. The method involves rendering action trajectories into image-space conditions and employing offline geometric calibration, alongside a novel counterfactual post-training approach that modifies recorded actions to generate a broader range of future videos. The experimental results demonstrate that DreamTrue achieves state-of-the-art action following on the AgiBot platform, significantly reducing the human-assessed interaction defect rate from 48.12% to 6.25%, and it ranks first in the world model track of the AgiBot World Challenge 2026.</div>
+<div class="mono" style="margin-top:8px">DreamTrue的研究动机是开发一个机器人世界模型，以确保动作忠实和物理上合理的视频预测，解决现有数据集中存在的校准不精确和交互覆盖有限等挑战。主要方法包括将动作轨迹渲染为图像空间条件，并采用离线几何校准，同时引入一种新颖的反事实后训练方法，修改记录的动作以生成更广泛的未来视频。实验结果表明，DreamTrue在AgiBot平台上实现了最先进的动作跟随，显著将人类评估的交互缺陷率从48.12%降低到6.25%，并在AgiBot世界挑战赛2026的世界模型赛道中排名第一。</div>
+</details>
+</div>
+<div class="card">
+<div class="title">CSF: Contextual Safety Filtering for Motion Generators</div>
+<div class="meta-line">Authors: Lizhi Yang, Yiling Hou, Yao Tang, Junheng Li, Daniel Weng, Blake Werner, Aaron D. Ames</div>
+<div class="meta-line">First: 2026-10-08T17:59:50+00:00 · Latest: 2026-10-08T17:59:50+00:00</div>
+<div class="meta-line">Comments: 8 pages, 6 figures, website at https://lzyang2000.github.io/csf/</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.12467v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.12467v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a> · <a href="https://lzyang2000.github.io/csf/">Project1</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Text-conditioned motion generators produce trackable whole-body motion, but they have no notion of scene-dependent safety: the same action may target an object or a person. Existing safeguards either inspect the prompt, require labeled motion data, or enforce geometric constraints; therefore, they do not directly account for how scene context changes a motion&#x27;s meaning. We introduce contextual safety filtering (CSF), a training-free filter that grounds natural-language safety rules in safe and unsafe reference trajectories produced by the generator. For each active rule, safe and unsafe reference trajectories define an affine safety value that a safe reference tracking CBF-QP enforces. Across four pretrained generators with different architectures, CSF activates the intended rules in all explicit and scene-triggered unsafe cases and reduces the danger-event rate by up to 90%, while preserving 88-100% of benign motions. We demonstrate the complete system on a real-world Unitree G1, where it successfully prevents unsafe motions in a variety of scenarios, including interactions with humans and objects.</div></details>
+<details class="detail"><summary>中文标题/摘要</summary>
+<div class="mono"><b>标题：</b>CSF：运动生成器的上下文安全过滤</div>
+<div class="mono" style="margin-top:8px">文本条件的运动生成器能够生成可追踪的全身运动，但它们对场景依赖的安全性没有概念：同一动作可能针对物体或人。现有的安全措施要么检查提示，要么需要标记的运动数据，或强制几何约束；因此，它们并未直接考虑场景上下文如何改变运动的含义。我们引入了上下文安全过滤（CSF），这是一种无训练的过滤器，将自然语言安全规则与生成器产生的安全和不安全参考轨迹相结合。对于每个激活的规则，安全和不安全的参考轨迹定义了一个仿射安全值，安全参考跟踪CBF-QP强制执行。在四个具有不同架构的预训练生成器中，CSF在所有显式和场景触发的不安全情况下激活了预期的规则，并将危险事件率降低了多达90%，同时保留了88-100%的良性运动。我们在真实的Unitree G1上演示了完整系统，成功防止了在与人类和物体互动等多种场景中的不安全运动。</div>
+</details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">The research addresses the lack of scene-dependent safety in text-conditioned motion generators, which can misinterpret actions based on context. The authors propose a training-free method called contextual safety filtering (CSF), which utilizes safe and unsafe reference trajectories to establish safety rules grounded in natural language. Experimental results show that CSF effectively activates intended safety rules in various scenarios, reducing danger-event rates by up to 90% while maintaining 88-100% of benign motions, and it is demonstrated on a real-world Unitree G1 robot to prevent unsafe actions during interactions with humans and objects.</div>
+<div class="mono" style="margin-top:8px">本研究的动机在于提高文本条件运动生成器的安全性，而现有生成器缺乏考虑场景依赖安全性的能力。作者提出了一种名为上下文安全过滤（CSF）的无训练方法，该方法利用基于生成系统生成的安全和不安全参考轨迹的自然语言安全规则。实验结果表明，CSF能够有效激活各种不安全场景中的预期安全规则，将危险事件发生率降低多达90%，同时保持88-100%的良性动作，并成功在真实的Unitree G1机器人上实施，以防止与人类和物体交互时的不安全行为。</div>
+</details>
+</div>
+<div class="card">
+<div class="title">On the estimation and validity of AI time horizons---a statistical look at the METR plot</div>
+<div class="meta-line">Authors: Drew T. Nguyen, William Fithian</div>
+<div class="meta-line">First: 2026-10-08T17:59:50+00:00 · Latest: 2026-10-08T17:59:50+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.12466v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.12466v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">METR&#x27;s 50\% time horizon measures the human completion time of software tasks that an AI solves with 50\% probability, allowing AI capabilities to be expressed in interpretable units. On 228 tasks and 26 AIs, we recompute the time horizons using splines and item-response theory to relax the assumption that the AI difficulty of a task depends linearly on the log of human time. Our fitted spline can be interpreted as a function that \emph{converts} human time to AI difficulty; it is nearly flat in a region from 2--30 min but close to linear elsewhere. Hence, a time-horizon jump from 3 min to 30 min is much easier than one from 30 min to 5 hours despite the same multiplier of $10 \times$. Overall, we contribute time-horizon point estimates that perform better under a cross-validated suite of proper scoring rules, as well as diagnostic plots for assessing time horizons&#x27; construct validity. We suggest that time horizons be interpreted together with the diagnostic plots, especially as new time-horizon-based benchmarks are proposed or existing ones grow to include longer tasks.</div></details>
+<details class="detail"><summary>中文标题/摘要</summary>
+<div class="mono"><b>标题：</b>关于人工智能时间范围的估计和有效性——METR图的统计分析</div>
+<div class="mono" style="margin-top:8px">METR的50\%时间范围测量AI以50\%概率解决软件任务所需的人类完成时间，从而使AI能力以可解释的单位表达。在228个任务和26个AI上，我们使用样条和项目反应理论重新计算时间范围，以放宽AI任务难度与人类时间对数线性相关的假设。我们拟合的样条可以解释为一个将人类时间“转换”为AI难度的函数；在2到30分钟的区域几乎是平坦的，但在其他地方接近线性。因此，从3分钟到30分钟的时间范围跳跃比从30分钟到5小时的跳跃要容易得多，尽管乘数都是$10 \times$。总体而言，我们贡献了在交叉验证的适当评分规则套件下表现更好的时间范围点估计，以及用于评估时间范围构建有效性的诊断图。我们建议将时间范围与诊断图一起解释，特别是在提出新的基于时间范围的基准或现有基准扩展到更长任务时。</div>
+</details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">The research investigates the estimation and validity of AI time horizons, which quantify the time required for humans to complete software tasks that an AI can solve with a 50% probability. The authors applied splines and item-response theory to analyze 228 tasks across 26 AIs, challenging the assumption of a linear relationship between AI difficulty and human completion time. The findings reveal that the time horizon exhibits a nearly flat curve for tasks taking 2 to 30 minutes, indicating that transitions within this range are significantly easier than those extending from 30 minutes to 5 hours, despite similar multipliers. Additionally, the study provides improved time-horizon estimates and diagnostic plots for evaluating the construct validity of these time horizons, emphasizing the need for their interpretation alongside these plots as benchmarks evolve.</div>
+<div class="mono" style="margin-top:8px">本研究探讨了人工智能时间范围的估计和有效性，特别关注METR图，该图量化了人工智能以50%概率解决软件任务的人类完成时间。作者采用样条和项目反应理论对228个任务和26个人工智能重新计算时间范围，挑战了人工智能难度与人类时间之间线性关系的假设。研究结果表明，拟合的样条在2到30分钟的任务中显示出几乎平坦的区域，表明从3分钟到30分钟的时间范围增加显著容易于从30分钟到5小时，尽管两者都是十倍的增加。此外，研究提供了改进的时间范围估计和用于评估这些时间范围构建有效性的诊断图，倡导在未来基准中共同解释它们。</div>
+</details>
+</div>
+<div class="card">
+<div class="title">A Balanced Data Diet: Addressing the Exploration Bottleneck in Mega-Scale RL for Robot Control</div>
+<div class="meta-line">Authors: Octi Zhang, Mateo Guaman Castro, Patrick Yin, Ignacio Dagnino, Abhishek Gupta, Rosario Scalise, Byron Boots</div>
+<div class="meta-line">Venue: CoRL 2026</div>
+<div class="meta-line">First: 2026-10-08T17:59:50+00:00 · Latest: 2026-10-08T17:59:50+00:00</div>
+<div class="meta-line">Comments: CoRL 2026. Project website: https://sgs-rl.github.io/</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.12465v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.12465v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a> · <a href="https://sgs-rl.github.io/">Project1</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">General-purpose robots must perform a wide range of tasks from agile locomotion to dexterous manipulation. While sim-to-real reinforcement learning (RL) has proven to be a useful tool for this goal, current RL pipelines depend on engineering-heavy, per-task structural priors such as shaped rewards and demonstrations. Recent work has shown that diverse simulator resets, combined with massively parallel simulation, can alleviate much of this engineering burden on several manipulation problems. However, we find that naively scaling this paradigm to more precise or dynamic problems remains non-trivial. While simulator resets can help with exploration, uniformly sampling over this distribution wastes a growing fraction of learning experience on task configurations the policy has already mastered or cannot yet attempt. This makes it challenging to see the expected benefits of scaling parallel environments for RL, since much of the learning signal in a batch is wasted during learning. To mitigate this, we introduce Success Guided Sampling (SGS), a simple adaptive sampler that concentrates RL training on task configurations around the frontier of the policy&#x27;s capabilities. Doing so allows large-scale simulated RL to make the most out of the experience in a batch, enabling much more effective scaling to large-scale parallel simulation. Across experiments using up to $2^{20}$ (over one million) parallel environments, SGS enables RL to solve challenging multi-terrain quadruped locomotion and contact-rich assembly tasks that prior methods fail to solve. Finally, we distill the learned manipulation policies into RGB-based policies and demonstrate zero-shot transfer to several challenging assembly tasks on real hardware. Project website: https://sgs-rl.github.io/.</div></details>
+<details class="detail"><summary>中文标题/摘要</summary>
+<div class="mono"><b>标题：</b>平衡的数据饮食：解决机器人控制中大规模强化学习的探索瓶颈</div>
+<div class="mono" style="margin-top:8px">通用机器人必须执行从灵活运动到灵巧操作的广泛任务。尽管模拟到现实的强化学习（RL）已被证明是实现这一目标的有用工具，但当前的RL管道依赖于工程密集型的每任务结构先验，如形状奖励和演示。最近的研究表明，多样化的模拟器重置结合大规模并行模拟可以减轻多个操作问题上的工程负担。然而，我们发现简单地将这一范式扩展到更精确或动态的问题仍然不是一件简单的事。虽然模拟器重置可以帮助探索，但在该分布上均匀采样会浪费越来越多的学习经验在策略已经掌握或尚未尝试的任务配置上。这使得在RL中看到扩展并行环境的预期好处变得具有挑战性，因为批次中的大量学习信号在学习过程中被浪费。为此，我们引入了成功引导采样（SGS），这是一种简单的自适应采样器，集中RL训练在策略能力边界附近的任务配置上。这样可以使大规模模拟RL充分利用批次中的经验，从而更有效地扩展到大规模并行模拟。在使用多达$2^{20}$（超过一百万）并行环境的实验中，SGS使RL能够解决先前方法无法解决的具有挑战性的多地形四足运动和接触丰富的组装任务。最后，我们将学习到的操作策略提炼为基于RGB的策略，并在真实硬件上展示零样本迁移到多个具有挑战性的组装任务。项目网站：https://sgs-rl.github.io/</div>
+</details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">The motivation behind this research is to enhance the effectiveness of reinforcement learning (RL) in general-purpose robots, which need to perform a variety of tasks without heavy engineering for each specific task. The authors propose a method called Success Guided Sampling (SGS), an adaptive sampler that focuses RL training on task configurations that are near the limits of the policy&#x27;s capabilities. Experimental results show that using SGS in up to 2^{20} parallel environments significantly improves the ability of RL to tackle complex tasks such as multi-terrain quadruped locomotion and intricate assembly tasks, achieving solutions where previous methods struggled, and enabling zero-shot transfer of learned policies to real hardware.</div>
+<div class="mono" style="margin-top:8px">本研究解决了当前机器人控制中强化学习（RL）方法的局限性，特别是对工程密集型任务特定先验的依赖。为了克服大规模RL中的探索瓶颈，作者提出了成功引导采样（SGS），这是一种自适应采样方法，专注于接近策略能力的任务配置进行训练。实验结果表明，SGS显著提高了在超过一百万个并行环境中学习的效率，成功解决了以前方法无法解决的复杂四足动物运动和组装任务，并实现了学习策略在真实硬件上的零-shot迁移。</div>
+</details>
+</div>
+<div class="card">
+<div class="title">From Reactive Containment to Proactive Assurance: Lessons from OpenAI, Anthropic, and Google Agent Security Incidents</div>
+<div class="meta-line">Authors: Abbas Raftari</div>
+<div class="meta-line">First: 2026-10-08T17:59:49+00:00 · Latest: 2026-10-08T17:59:49+00:00</div>
+<div class="meta-line">Comments: Conceptual research paper; includes one framework figure. The manuscript proposes a model-agnostic Boundary Assurance Stack for proactive security and accountable human oversight of high-capability AI agents</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.12463v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.12463v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">In 2026, cybersecurity evaluations involving OpenAI, Anthropic, and Google agents reached real systems outside their authorized test scope. The paths were different. OpenAI agents exploited research infrastructure, coordinated across runs, and compromised parts of Hugging Face&#x27;s production environment. Anthropic reported cases in which a misconfigured third-party environment exposed real systems to agents pursuing simulated cyber tasks. In a separately reported evaluation, Google&#x27;s Gemini accessed three real organizations through an unintended internet route; Google stated that the model stopped in all three instances. Taken together, the cases show why an evaluation cannot rely on an assumed boundary. That boundary must be verified while the agent is operating. This comparative instrumental case study develops a Proactive Agent Security Assurance Cycle (PASAC) and a five-layer Boundary Assurance Stack. The framework combines risk-tiered task design, executable scope contracts, pre-run validation, least-capability access, independent egress enforcement, credential restrictions, cross-run monitoring, automatic stop conditions, and evidence-based reauthorization. A leading-indicator model, nine design propositions, and seven falsifiable hypotheses turn these lessons into a testable research program. Because the public Gemini record is limited to attributed statements and journalism, its detailed causal mechanism remains provisional. The central conclusion is straightforward: proactive agent security requires continuous assurance across the full execution system, not confidence in any single sandbox or safeguard.</div></details>
+<details class="detail"><summary>中文标题/摘要</summary>
+<div class="mono"><b>标题：</b>从反应性控制到主动性保障：来自OpenAI、Anthropic和谷歌代理安全事件的教训</div>
+<div class="mono" style="margin-top:8px">在2026年，涉及OpenAI、Anthropic和谷歌代理的网络安全评估达到了其授权测试范围之外的真实系统。路径各异。OpenAI代理利用研究基础设施，在多个运行中协调，并妥协了Hugging Face生产环境的部分。Anthropic报告了由于配置错误的第三方环境使真实系统暴露于追求模拟网络任务的代理的案例。在另一个报告的评估中，谷歌的Gemini通过意外的互联网路线访问了三个真实组织；谷歌表示该模型在所有三个实例中都停止了。综合来看，这些案例表明评估不能依赖于假定的边界。该边界必须在代理运行时进行验证。本比较工具案例研究开发了一个主动代理安全保障周期（PASAC）和一个五层边界保障堆栈。该框架结合了风险分级任务设计、可执行范围合同、预运行验证、最低能力访问、独立出口执行、凭证限制、跨运行监控、自动停止条件和基于证据的重新授权。一个领先指标模型、九个设计命题和七个可证伪假设将这些教训转化为可测试的研究计划。由于公共Gemini记录仅限于归属声明和新闻报道，其详细的因果机制仍然是暂定的。中心结论很简单：主动代理安全需要在整个执行系统中持续保障，而不是对任何单一沙箱或保护措施的信心。</div>
+</details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">The motivation behind this research is to address the security vulnerabilities observed in AI agents from OpenAI, Anthropic, and Google, which were found to breach their authorized test scopes in 2026. The authors conducted a comparative instrumental case study to develop a Proactive Agent Security Assurance Cycle (PASAC) and a five-layer Boundary Assurance Stack, emphasizing the need for continuous verification of operational boundaries during agent execution. Key findings indicate that proactive security measures must be implemented across the entire execution system, as reliance on assumed boundaries or single safeguards is insufficient to prevent unauthorized access to real systems.</div>
+<div class="mono" style="margin-top:8px">本研究的动机在于解决OpenAI、Anthropic和Google的AI代理面临的网络安全挑战，这些挑战导致了涉及真实系统的事件，超出了其授权测试环境。该研究采用比较性工具案例研究方法分析这些事件，并开发了主动代理安全保障周期（PASAC）以及五层边界保障堆栈，以增强安全措施。关键发现表明，评估不能依赖假定的边界，正如代理能够突破真实系统所示，强调了在执行过程中需要持续的保障机制，而不是依赖孤立的安全措施。</div>
+</details>
+</div>
+<div class="card">
+<div class="title">What 30,000 Hours of Ego-centric Video Does Not Teach</div>
+<div class="meta-line">Authors: Jiahua Dong, Anurag Bagchi, Yash Jangir, Muhammad Zubair Irshad, Sergey Zakharov, Martial Hebert, Homanga Bharadhwaj, Yu-Xiong Wang, Vitor Campagnolo Guizilini, Pavel Tokmakov</div>
+<div class="meta-line">First: 2026-10-08T17:59:49+00:00 · Latest: 2026-10-08T17:59:49+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.12464v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.12464v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">World models offer a promising alternative to physics-based simulators, yet remain far from practical deployment. We ask how far scaling ego-centric human video takes them, using a dataset of 30,000 hours spanning over 1,000 scene types and 14,000 contributors. Rather than relying on opaque downstream metrics, we directly evaluate agent and object-interaction fidelity on a challenging out-of-distribution benchmark. Increasing training data by 100x improves both, but unevenly: the agent is modeled well, while object fidelity remains far lower and improves slowly. We show that the agent gains need not come from data, and a careful visual conditioning design saturates fidelity with a fraction of it, which lets us measure object fidelity on its own and discover its saturation point. We then introduce a supervision scheme that shifts capacity from scene appearance toward object dynamics, improving object fidelity though a substantial gap remains. Finally, our conclusions transfer to downstream humanoid modeling. Overall, our results suggest that scaling ego-centric data brings agent modeling close to its limit while leaving its effects on the world far behind, and that closing this gap will depend on how models are trained, not only on how much data they see.</div></details>
+<details class="detail"><summary>中文标题/摘要</summary>
+<div class="mono"><b>标题：</b>30,000小时自我中心视频未能教授的内容</div>
+<div class="mono" style="margin-top:8px">世界模型为基于物理的模拟器提供了一个有前景的替代方案，但仍然远未实现实际部署。我们探讨了自我中心人类视频的扩展能带来多大进展，使用了一个包含30,000小时、涵盖1,000多种场景类型和14,000名贡献者的数据集。我们不依赖不透明的下游指标，而是直接评估代理和物体交互的保真度，使用一个具有挑战性的分布外基准。将训练数据增加100倍可以改善这两者，但改善程度不均：代理建模良好，而物体保真度仍然较低且改善缓慢。我们展示了代理的收益不必来自数据，精心设计的视觉条件可以在少量数据下饱和保真度，这使我们能够单独测量物体保真度并发现其饱和点。然后，我们引入了一种监督方案，将能力从场景外观转移到物体动态上，改善了物体保真度，尽管仍然存在显著差距。最后，我们的结论可以转移到下游类人建模。总体而言，我们的结果表明，扩展自我中心数据使代理建模接近其极限，而对世界的影响则远远滞后，缩小这一差距将取决于模型的训练方式，而不仅仅是它们看到的数据量。</div>
+</details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">This research investigates the limitations of ego-centric video data in enhancing world models, which are alternatives to physics-based simulators. Using a dataset of 30,000 hours of video from over 1,000 scene types, the study evaluates the fidelity of agent and object interactions on a challenging benchmark. The findings reveal that while increasing training data by 100 times improves agent modeling significantly, object fidelity remains lower and improves at a slower rate. The research also demonstrates that improvements in agent fidelity can be achieved through careful visual conditioning rather than solely relying on data volume, and introduces a supervision scheme that reallocates focus from scene appearance to object dynamics, resulting in improved object fidelity despite a persistent gap in performance.</div>
+<div class="mono" style="margin-top:8px">本研究探讨了使用自我中心视频数据训练世界模型的局限性，动机是这些模型作为物理基础模拟器的替代方案的潜力。研究使用了来自1000多种场景类型和14000名贡献者的30000小时视频数据集，以评估在具有挑战性的基准测试中代理和物体交互的保真度。研究结果表明，尽管将训练数据增加100倍可以增强代理建模，但物体保真度的提高速度缓慢且仍然显著较低，这表明有效的训练设计对于增强物体动态至关重要，而这对于这些模型的实际应用至关重要。</div>
+</details>
+</div>
+<div class="card">
+<div class="title">WorldGuide: Goal-Directed Video World Model for Procedural Task Execution</div>
+<div class="meta-line">Authors: Ankan Deria, Komal Kumar, Hisham Cholakkal, Fahad Shahbaz Khan, Salman Khan</div>
+<div class="meta-line">First: 2026-10-08T17:59:31+00:00 · Latest: 2026-10-08T17:59:31+00:00</div>
+<div class="meta-line">Comments: 34 pages, 14 figures, 15 Tables</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.12459v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.12459v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Video generators and video-based world models can synthesize plausible visual trajectories, but long-horizon procedural tasks require generation to adapt to what has actually been produced. A model must determine the next action from its generated state, execute that action, and recognize when the task is complete. Open-loop generation cannot adapt to execution outcomes, while existing closed-loop systems often rely on pretrained executors or indirect verification. This leaves a gap between deciding an action and successfully realizing it. We formulate procedural video generation as \emph{closed-loop task execution in visual world space} and introduce \textbf{WorldGuide}. Given only an initial image and a task goal, WorldGuide predicts an atomic action, generates its corresponding video clip, and uses the generated result to select the next action or terminate. The Planner and Executor are trained on the same step-level procedural demonstrations: the Planner learns to predict the next atomic action or task completion from visual progress, while the Executor is directly trained to realize the predicted actions. Hierarchical visual memory maintains state across long-horizon execution with bounded history token cost. Due to the lack of step-level action-video supervision for joint planner-executor training, we introduce \textbf{WorldGuide Bench}: approximately 59K step-annotated videos across 245 tasks and 27 procedural categories. WorldGuide achieves a 33.33\% Task Success on \textbf{WorldGuide-Bench}, compared with 29.90\% for the strong recent video model MiniMax-H3, even though MiniMax-H3 receives reference action plans, and achieves 47.69\% on \textbf{VideoCraft-Bench} compared with 32.73\% for MiniMax-H3 under goal-only conditioning. These results demonstrate the importance of coupling planning with learned execution for goal-directed procedural video generation.</div></details>
+<details class="detail"><summary>中文标题/摘要</summary>
+<div class="mono"><b>标题：</b>WorldGuide：用于程序任务执行的目标导向视频世界模型</div>
+<div class="mono" style="margin-top:8px">视频生成器和基于视频的世界模型可以合成可信的视觉轨迹，但长时间跨度的程序任务需要生成适应实际产生的内容。模型必须从其生成的状态中确定下一个动作，执行该动作，并识别任务何时完成。开放式生成无法适应执行结果，而现有的闭环系统通常依赖于预训练的执行器或间接验证。这在决定动作和成功实现之间留下了空白。我们将程序视频生成公式化为“视觉世界空间中的闭环任务执行”，并引入了WorldGuide。仅给定初始图像和任务目标，WorldGuide预测一个原子动作，生成相应的视频片段，并利用生成的结果选择下一个动作或终止。规划者和执行者在相同的步骤级程序演示上进行训练：规划者学习从视觉进展中预测下一个原子动作或任务完成，而执行者则直接训练以实现预测的动作。分层视觉记忆在长时间执行中保持状态，具有有限的历史令牌成本。由于缺乏步骤级动作-视频监督以进行联合规划者-执行者训练，我们引入了WorldGuide Bench：大约59K个步骤标注视频，涵盖245个任务和27个程序类别。WorldGuide在WorldGuide-Bench上实现了33.33%的任务成功率，而强大的近期视频模型MiniMax-H3为29.90%，尽管MiniMax-H3接收参考动作计划，并在VideoCraft-Bench上实现了47.69%，而MiniMax-H3在仅目标条件下为32.73%。这些结果表明，将规划与学习执行结合对于目标导向的程序视频生成的重要性。</div>
+</details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">The motivation behind this research is to improve procedural task execution in video generation, addressing the limitations of existing models that either rely on open-loop generation or pretrained executors. The authors introduce WorldGuide, a closed-loop system that predicts atomic actions based on an initial image and task goal, generates corresponding video clips, and adapts subsequent actions based on the generated results. Experimental results show that WorldGuide achieves a 33.33% task success rate on the WorldGuide-Bench, outperforming the MiniMax-H3 model, which has a 29.90% success rate, despite the latter receiving reference action plans, and achieves 47.69% on VideoCraft-Bench compared to MiniMax-H3&#x27;s 32.73%, highlighting the effectiveness of integrating planning with execution in procedural video generation.</div>
+<div class="mono" style="margin-top:8px">本研究解决了视频生成中执行长时间程序任务的挑战，现有方法难以适应执行结果。作者提出了WorldGuide，一个闭环任务执行模型，基于视觉输入预测动作并生成相应的视频片段以指导后续动作。实验结果表明，WorldGuide在WorldGuide-Bench上的任务成功率为33.33%，优于MiniMax-H3模型的29.90%，在VideoCraft-Bench上的成功率为47.69%，而MiniMax-H3为32.73%，突显了在程序视频生成中将规划与执行结合的有效性。</div>
+</details>
+</div>
+<div class="card">
+<div class="title">OmniCapBench: A Deep-Structured Evaluation Framework for Fine-Grained Audio-Visual Captioning</div>
+<div class="meta-line">Authors: Zhongyu Yang, Jiale Tao, Ruitao Chen, Zuhao Yang, Yingfang Yuan, Xueliang Zhao, Auden, Kai Wang, Shuai Shao, Biao Wang, Steve Yves, Qinglin Lu</div>
+<div class="meta-line">Venue: NeurIPS 2026</div>
+<div class="meta-line">First: 2026-10-08T17:59:21+00:00 · Latest: 2026-10-08T17:59:21+00:00</div>
+<div class="meta-line">Comments: Accepted by NeurIPS 2026. Code and benchmark can be found at https://01yzzyu.github.io/OmniCapBench/</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.12458v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.12458v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a> · <a href="https://01yzzyu.github.io/OmniCapBench/">Project1</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Multimodal large language models (MLLMs) are rapidly evolving toward continuous audio--visual reasoning, creating an urgent need for evaluations that expose their capability limits. Audio--visual captioning is an ideal diagnostic task, yet current benchmarks face a coupled trade-off: whole-caption scores provide coverage without localization, local probes provide localization without coverage, and unconstrained LLM judges introduce instability. We introduce OmniCapBench (Omni-Video Caption Benchmark), a benchmark that reframes audio--visual caption evaluation as a deep-structured diagnostic framework. OmniCapBench shifts the prediction target from free-form text to sets of atomic, verifiable evaluation units across three tracks: entity references, visual shots, and audio events, enabling reliable scoring with deterministic constraint checks and localized LLM-based semantic comparisons. With 786 densely annotated videos, OmniCapBench effectively distinguishes MLLM perception errors, including temporal grounding failures, identity drift, cross-modal misalignment, and hallucinated descriptions. Evaluating frontier MLLMs reveals strong local perception but weak long-horizon audio--visual reasoning, particularly in identity drift and cross-modal misalignment, providing a fine-grained roadmap for omnimodal development.</div></details>
+<details class="detail"><summary>中文标题/摘要</summary>
+<div class="mono"><b>标题：</b>OmniCapBench：一种用于细粒度音视频字幕的深度结构评估框架</div>
+<div class="mono" style="margin-top:8px">多模态大型语言模型（MLLMs）正在迅速发展，朝着连续的音视频推理方向迈进，这对评估其能力极限提出了迫切需求。音视频字幕是一个理想的诊断任务，但当前基准面临着一个耦合的权衡：整体字幕评分提供覆盖但缺乏定位，局部探测提供定位但缺乏覆盖，而不受限制的LLM评判引入了不稳定性。我们引入了OmniCapBench（Omni-视频字幕基准），一个将音视频字幕评估重新框架为深度结构诊断框架的基准。OmniCapBench将预测目标从自由形式文本转移到三个轨道的原子、可验证评估单元集合：实体引用、视觉镜头和音频事件，从而实现可靠的评分，结合确定性约束检查和基于LLM的语义比较。通过786个密集注释的视频，OmniCapBench有效区分了MLLM感知错误，包括时间定位失败、身份漂移、跨模态不对齐和虚构描述。对前沿MLLM的评估揭示了强大的局部感知能力，但在长时间音视频推理方面较弱，特别是在身份漂移和跨模态不对齐方面，为全模态发展提供了细粒度的路线图。</div>
+</details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">The research addresses the need for effective evaluation frameworks for multimodal large language models (MLLMs) in the context of audio-visual captioning, which serves as a diagnostic task to expose their limitations. The authors propose OmniCapBench, a benchmark that transforms audio-visual caption evaluation into a deep-structured framework by focusing on sets of atomic, verifiable evaluation units across three tracks: entity references, visual shots, and audio events. Experimental results with 786 densely annotated videos demonstrate that OmniCapBench can reliably identify MLLM perception errors, revealing strong local perception capabilities but highlighting weaknesses in long-horizon audio-visual reasoning, particularly regarding identity drift and cross-modal misalignment, thus providing insights for future developments in the field.</div>
+<div class="mono" style="margin-top:8px">本研究的动机在于需要有效的评估方法来评估多模态大型语言模型（MLLMs）在音视频字幕生成中的表现，这一任务有助于识别其局限性。作者提出了OmniCapBench，一个深度结构化的评估框架，将重点从自由形式的文本预测转向可验证的评估单元集合，包括实体引用、视觉镜头和音频事件。对786个密集注释视频的实验结果表明，尽管MLLMs在局部感知方面表现强劲，但在长时间音视频推理方面存在困难，尤其是在身份漂移和跨模态不对齐等领域，突显了模型开发中的具体改进方向。</div>
+</details>
+</div>
+<div class="card">
+<div class="title">BrickBench: Evaluating Agentic Brick Design</div>
+<div class="meta-line">Authors: Peter Kulits, Yiqing Xu, R. Kenny Jones, Cordelia Schmid, Jiajun Wu</div>
+<div class="meta-line">Venue: www</div>
+<div class="meta-line">First: 2026-10-08T17:58:56+00:00 · Latest: 2026-10-08T17:58:56+00:00</div>
+<div class="meta-line">Comments: Project page: http://www.brickben.ch</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.12452v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.12452v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">We propose BrickBench, a benchmark for agentic text-conditioned LEGO-set design. Given a prompt, an agent is tasked with producing an assembly that not only satisfies semantic and design criteria, but that can also be physically built. To do so, it must select parts from a discrete library and reason jointly about local and global constraints. We score validity, alignment, and design across three settings that vary in scale and part availability. We provide BrickAgent, an environment for coding agents to construct, inspect, and validate their designs. We find that leading agents largely satisfy verifiable physical and semantic requirements, but fall short of human designs. We release our benchmark and environment at http://www.brickben.ch</div></details>
+<details class="detail"><summary>中文标题/摘要</summary>
+<div class="mono"><b>标题：</b>BrickBench：评估自主砖块设计</div>
+<div class="mono" style="margin-top:8px">我们提出了BrickBench，一个用于自主文本条件LEGO套件设计的基准。给定一个提示，代理的任务是生成一个不仅满足语义和设计标准，而且可以实际构建的装配。为此，它必须从离散库中选择部件，并共同推理局部和全局约束。我们在三个不同规模和部件可用性设置中对有效性、对齐性和设计进行评分。我们提供了BrickAgent，一个用于编码代理构建、检查和验证其设计的环境。我们发现，领先的代理在很大程度上满足可验证的物理和语义要求，但仍不及人类设计。我们在http://www.brickben.ch发布了我们的基准和环境。</div>
+</details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">The motivation behind this research is to create a benchmark for evaluating agentic design in LEGO-set assembly based on text prompts. The authors developed BrickBench, which requires agents to select parts from a library while considering both local and global constraints to produce physically buildable designs. Experimental results indicate that while the leading agents meet many physical and semantic criteria, they do not achieve the same level of design quality as human-created models.</div>
+<div class="mono" style="margin-top:8px">本研究的动机在于评估基于文本提示的乐高积木组装中的智能设计。作者提出了BrickBench，一个基准，要求代理创建满足语义和物理标准的组装，需从库中选择零件并考虑各种约束。实验结果表明，尽管领先的代理在很大程度上能够满足所需的物理和语义标准，但仍未达到人类设计的组装质量。</div>
+</details>
+</div>
+<div class="card">
+<div class="title">One Block, Multiple Depths: Recurrent Vision Transformers with Depth-Programmed Experts</div>
+<div class="meta-line">Authors: Adrian Bulat, Yassine Ouali, Georgios Tzimiropoulos</div>
+<div class="meta-line">First: 2026-10-08T17:58:36+00:00 · Latest: 2026-10-08T17:58:36+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.12448v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.12448v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">In this work, we show that a single Transformer block, applied recurrently, can match the accuracy of a full-depth vision encoder at comparable inference FLOPs without intermediate feature distillation. reViT restores depth-specific transformations by representing the FFN at each recurrent depth as a convex combination of a small shared expert bank. A continuous normalized-depth coordinate programs this mixture, defining a resampleable trajectory through FFN parameter space. We evaluate this design in two regimes: supervised ImageNet-1k training and distillation from a DINOv2 teacher. Across both regimes, controlled adaptations identify weight-space merging as the strongest tested MoE family at a matching one-FFN budget, ahead of the token-dispatch and output-mixture alternatives. Trained from scratch, reViT-B/16 attains DeiT III accuracy with about 70\% fewer stored parameters. An 8-experts model distilled using only the teacher&#x27;s output features retains nearly all of its DINOv2 teacher&#x27;s linear-probe accuracy and transfers across classification, segmentation, and depth prediction. Elastic-depth training allows one checkpoint (trained model) to operate at multiple tested depths by resampling the same normalized coordinate interval. For fixed-depth deployment, the recurrent block can be materialized as a conventional dense graph, removing online routing and merging without changing the one-FFN-per-depth compute but expanding deployment storage.</div></details>
+<details class="detail"><summary>中文标题/摘要</summary>
+<div class="mono"><b>标题：</b>一个块，多重深度：具有深度编程专家的递归视觉变换器</div>
+<div class="mono" style="margin-top:8px">在这项工作中，我们展示了一个单一的变换器块，反复应用，可以在没有中间特征蒸馏的情况下，匹配全深度视觉编码器的准确性，同时保持相似的推理FLOPs。reViT通过将每个递归深度的FFN表示为小型共享专家库的凸组合，恢复深度特定的变换。一个连续的归一化深度坐标对这种混合进行编程，定义了通过FFN参数空间的可重采样轨迹。我们在两个领域评估了这个设计：监督的ImageNet-1k训练和从DINOv2教师的蒸馏。在这两个领域中，受控适应识别出权重空间合并是匹配一个FFN预算下测试的最强MoE家族，领先于令牌调度和输出混合替代方案。从头开始训练的reViT-B/16以大约70\%更少的存储参数达到了DeiT III的准确性。使用仅教师输出特征蒸馏的8个专家模型几乎保留了其DINOv2教师的线性探测准确性，并在分类、分割和深度预测中转移。弹性深度训练允许一个检查点（训练模型）通过重采样相同的归一化坐标区间在多个测试深度下运行。对于固定深度部署，递归块可以被实现为传统的稠密图，去除在线路由和合并，而不改变每个深度的一个FFN计算，但扩展了部署存储。</div>
+</details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">This research addresses the challenge of achieving high accuracy in vision tasks while maintaining efficient inference costs. The authors propose a recurrent Vision Transformer (reViT) that utilizes a single Transformer block applied multiple times, representing depth-specific transformations through a mixture of shared experts. Experimental results demonstrate that reViT can achieve accuracy comparable to full-depth vision encoders with approximately 70% fewer parameters, and an 8-expert model distilled from a DINOv2 teacher retains high accuracy across various tasks, including classification and segmentation, while allowing for flexible depth adaptation through elastic-depth training.</div>
+<div class="mono" style="margin-top:8px">本研究的动机在于需要高效的视觉编码器，以较低的计算成本实现高准确率。作者提出了一种递归视觉变换器（reViT），该变换器利用一个变换器块多次应用，将每个深度的前馈网络（FFN）表示为共享专家的混合，由连续的深度坐标进行编程。实验结果表明，reViT-B/16在使用约70%更少参数的情况下，达到了与DeiT III相当的准确率，而从DINOv2教师中蒸馏的8专家模型在分类和分割等多种任务中保持了高准确率，同时通过弹性深度训练实现了灵活的深度适应。</div>
+</details>
+</div>
+<div class="card">
+<div class="title">Bi-FORK: Generative Modeling of High-Dimensional Bifurcating Systems</div>
+<div class="meta-line">Authors: Anna Zimmel, Fleur Hendriks, Markus Holzleitner, Florian Sestak, Martin Weichselbaumer, Vlado Menkovski, Johannes Brandstetter</div>
+<div class="meta-line">First: 2026-10-08T17:58:36+00:00 · Latest: 2026-10-08T17:58:36+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.12449v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.12449v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Bifurcations are ubiquitous in physical systems, from structural buckling to fluid and climate dynamics, yet they remain largely unexplored in deep learning. At a symmetry-breaking bifurcation, a single input admits multiple equally valid solutions, violating the one-to-one assumption underlying most learned physical surrogates. We introduce Bi-FORK, a generative framework for learning these one-to-many solution maps in high-dimensional systems. Bi-FORK generates complete trajectories through latent flow matching, preserving space and time coherence, and uses repulsion-guided sampling to recover distinct solution branches in a single amortized pass. We evaluate Bi-FORK on buckling beams, mechanical metamaterials, and Allen-Cahn phase separation, spanning continuous, discrete, and field-valued bifurcations with discretizations up to 260,000 points. Bi-FORK recovers the multimodal solution structure while scaling several orders of magnitude beyond prior approaches, opening generative modeling to high-dimensional bifurcating physical systems.</div></details>
+<details class="detail"><summary>中文标题/摘要</summary>
+<div class="mono"><b>标题：</b>Bi-FORK：高维分岔系统的生成建模</div>
+<div class="mono" style="margin-top:8px">分岔在物理系统中无处不在，从结构屈曲到流体和气候动力学，但在深度学习中仍然 largely 未被探索。在对称破缺分岔中，单一输入允许多个同样有效的解，违反了大多数学习物理替代模型所依据的一对一假设。我们引入了 Bi-FORK，这是一个用于学习高维系统中这些一对多解映射的生成框架。Bi-FORK 通过潜在流匹配生成完整轨迹，保持空间和时间的一致性，并使用排斥引导采样在一次摊销传递中恢复不同的解分支。我们在屈曲梁、机械超材料和 Allen-Cahn 相分离上评估 Bi-FORK，涵盖了连续、离散和场值分岔，离散化高达 260,000 个点。Bi-FORK 恢复了多模态解结构，同时在多个数量级上超越了先前的方法，为高维分岔物理系统的生成建模打开了新的可能。</div>
+</details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">The research is motivated by the need to understand bifurcations in physical systems, which often present multiple valid solutions and challenge traditional one-to-one mappings in deep learning. The authors propose Bi-FORK, a generative framework that utilizes latent flow matching and repulsion-guided sampling to effectively learn one-to-many solution maps in high-dimensional systems. Experimental results demonstrate that Bi-FORK successfully recovers multimodal solution structures in various applications, including buckling beams and mechanical metamaterials, while significantly scaling beyond previous methods, handling discretizations of up to 260,000 points.</div>
+<div class="mono" style="margin-top:8px">该研究解决了在物理系统中建模分岔的挑战，尽管分岔在深度学习中常被忽视。作者提出了Bi-FORK，这是一种生成框架，旨在通过潜在流匹配和排斥引导采样来学习高维系统中的一对多解映射。实验结果表明，Bi-FORK能够有效恢复多模态解结构，适用于包括屈曲梁和机械超材料在内的多种场景，并显著超越以往方法的规模，从而推动了复杂分岔系统中的生成建模。</div>
+</details>
+</div>
+<div class="card">
+<div class="title">Caught in the Act: Probes Effectively Detect Sabotage and Catch Unverbalized Deception</div>
+<div class="meta-line">Authors: Oskar J. Hollinsworth, Alex F. Spies, Tigist Diriba, Adam Gleave, Chris Cundy</div>
+<div class="meta-line">First: 2026-10-08T17:58:13+00:00 · Latest: 2026-10-08T17:58:13+00:00</div>
+<div class="meta-line">Comments: 11 pages main text, 98 pages total; 18 figures, 18 tables. Code and data: https://github.com/AlignmentResearch/caught-in-the-act-probes</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.12445v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.12445v1">PDF</a> · <a href="https://github.com/AlignmentResearch/caught-in-the-act-probes">Code1</a> · <a href="https://huggingface.co/huggingface">Code2</a> · <a href="https://huggingface.co/docs/hub/spaces">Code3</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Recent incidents have highlighted the challenge of monitoring LLM agents and the danger of models deceiving people. We show that white-box deception detection via probes can be scaled up to frontier monitoring settings by collecting the largest deception dataset to date for training probes and introducing a novel probe architecture which can aggregate information across many layers and tokens. Our probes achieve 98.8% AUC in SHADE-Arena, surpassing an Opus 5.5 text-monitoring baseline, and show improved efficacy as the underlying model is scaled up. To push our probes to their limit, we test them on several cases where deception cannot be determined from the context alone. In these cases, which we refer to as introspective deception, the ground truth can only be determined through careful elicitation or thorough knowledge of a model&#x27;s training data. In one such evaluation, we show that probes can distinguish transcripts containing a model&#x27;s true hidden goal from other goals with an AUC of up to 99.7%. Our probes also readily detect deception on prominent open-weight models which lie about politically sensitive topics, and about their beliefs when put under pressure. We release our training dataset, dubbed FIBS, to help drive frontier deployment of effective probes, and encourage the community to expand upon it with further examples of deception and sabotage.</div></details>
+<details class="detail"><summary>中文标题/摘要</summary>
+<div class="mono"><b>标题：</b>被抓现行：探测器有效检测破坏行为并捕捉未言明的欺骗</div>
+<div class="mono" style="margin-top:8px">最近的事件突显了监控大型语言模型（LLM）代理的挑战以及模型欺骗人的危险。我们展示了通过探测器进行白盒欺骗检测可以通过收集迄今为止最大的欺骗数据集来扩展到前沿监控设置，并引入一种新型探测器架构，可以跨多个层和标记聚合信息。我们的探测器在SHADE-Arena中实现了98.8%的AUC，超过了Opus 5.5文本监控基线，并随着基础模型的扩展显示出更高的有效性。为了将我们的探测器推向极限，我们在几个情况下测试它们，在这些情况下，欺骗无法仅通过上下文确定。在这些情况下，我们称之为内省欺骗，只有通过仔细引导或对模型训练数据的深入了解才能确定真实情况。在一次这样的评估中，我们展示了探测器可以以高达99.7%的AUC区分包含模型真实隐藏目标的转录与其他目标。我们的探测器还能够轻松检测在政治敏感话题上撒谎的显著开放权重模型的欺骗，以及在压力下对其信念的欺骗。我们发布了我们的训练数据集，称为FIBS，以帮助推动有效探测器的前沿部署，并鼓励社区通过进一步的欺骗和破坏示例来扩展它。</div>
+</details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">The motivation behind this research is to address the challenges of monitoring large language model (LLM) agents and the risks associated with their potential to deceive users. The authors developed a white-box deception detection method using probes, which were trained on the largest deception dataset to date and incorporated a novel architecture capable of aggregating information across multiple layers and tokens. The experimental results demonstrate that these probes achieved an impressive 98.8% AUC in the SHADE-Arena, outperforming existing text-monitoring baselines, and were particularly effective in identifying introspective deception, with AUC values reaching up to 99.7% in distinguishing true hidden goals from other objectives.</div>
+<div class="mono" style="margin-top:8px">本研究的动机在于解决监测大型语言模型（LLM）代理的挑战以及它们可能欺骗用户的风险。作者开发了一种使用探针的白盒欺骗检测方法，该方法在迄今为止最大的欺骗数据集上进行训练，并采用了一种新颖的架构，能够跨多个层和标记聚合信息。实验结果表明，这些探针在SHADE-Arena中达到了98.8%的AUC，超越了现有的文本监测基线，并在识别内省欺骗方面表现出色，在区分真实隐藏目标与其他目标时，AUC高达99.7%，从而展示了它们在检测政治敏感背景下的欺骗的实用性。</div>
+</details>
+</div>
+<div class="card">
+<div class="title">Rounding in Preconditioner Space: Redesigning 4-bit AdamW Optimizer-State Quantization</div>
+<div class="meta-line">Authors: Hanyang Li, Shao Tang, Daniel Thomas Braithwaite, Gregory Dexter, Leonardo Neves, Aman Gupta, Hiroto Udagawa, Abhishek Shivanna, Daniel Silva, Rohan Ramanath</div>
+<div class="meta-line">First: 2026-10-08T17:58:09+00:00 · Latest: 2026-10-08T17:58:09+00:00</div>
+<div class="meta-line">Comments: 23 pages</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.12444v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.12444v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Quantizing AdamW&#x27;s optimizer states reduces persistent storage, but quantization errors propagate through the moment recurrences and perturb subsequent adaptive updates. We redesign 4-bit optimizer-state quantization for AdamW from the perspective of \emph{rounding space}: the coordinate in which a quantizer chooses between adjacent reconstruction levels. For the second moment, a local analysis of the quantization cell adjacent to zero shows that small mean state error need not imply small mean preconditioner error at the next step. A one-dimensional quadratic construction further shows qualitatively different optimization dynamics under state-space and preconditioner-space rounding. These results motivate Zero-Inclusive Preconditioner-space Stochastic Rounding (\textbf{ZIP-SR}), which retains zero in the second-moment codebook and computes stochastic-rounding probabilities in preconditioner space. As a complementary route, Zero-Excluding EDEN calibration (\textbf{ZE-EDEN}) uses a zero-excluding second-moment codebook and rescales the quantized second-moment block to mitigate the preconditioner distortion caused by the positive quantization floor. Both configurations use 4-bit NormalFloat (NF4) for the first moment, with targeted stochastic rounding of the LM-head first moment during the final 10\% of training. Across GPT- and Llama-style pretraining experiments ranging from \textbf{130M} to \textbf{2.7B} parameters, both methods reduce TorchAO 4-bit AdamW&#x27;s mean validation-loss gap to 32-bit AdamW at every evaluated model size, with the largest reported gap reduction reaching \textbf{70\%}. In full-parameter supervised fine-tuning, both recipes achieve lower validation loss than TorchAO while remaining close to 32-bit AdamW on downstream tasks.</div></details>
+<details class="detail"><summary>中文标题/摘要</summary>
+<div class="mono"><b>标题：</b>预条件器空间中的舍入：重新设计4位AdamW优化器状态量化</div>
+<div class="mono" style="margin-top:8px">量化AdamW的优化器状态减少了持久存储，但量化误差通过矩的递归传播并扰动后续的自适应更新。我们从\emph{舍入空间}的角度重新设计了AdamW的4位优化器状态量化：量化器在相邻重构级别之间选择的坐标。对于第二矩，零附近量化单元的局部分析表明，小的均值状态误差不一定意味着下一步的小均值预条件器误差。一维二次构造进一步显示了在状态空间和预条件器空间舍入下的优化动态 qualitatively 不同。这些结果激励了零包含预条件器空间随机舍入（\textbf{ZIP-SR}），它在第二矩代码本中保留零，并在预条件器空间计算随机舍入概率。作为补充途径，零排除EDEN校准（\textbf{ZE-EDEN}）使用零排除的第二矩代码本，并重新缩放量化的第二矩块，以减轻由正量化下限引起的预条件器失真。这两种配置在第一矩上使用4位NormalFloat（NF4），并在训练的最后10\%中对LM-head第一矩进行有针对性的随机舍入。在范围从\textbf{130M}到\textbf{2.7B}参数的GPT和Llama风格的预训练实验中，这两种方法都将TorchAO 4位AdamW的均值验证损失差距减少到32位AdamW在每个评估模型大小下，最大报告的差距减少达到\textbf{70\%}。在全参数监督微调中，这两种方法在下游任务中实现了比TorchAO更低的验证损失，同时仍然接近32位AdamW。</div>
+</details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">The research addresses the challenge of quantizing AdamW&#x27;s optimizer states to reduce storage requirements while managing the propagation of quantization errors that can affect adaptive updates. The authors propose a redesign of the 4-bit optimizer-state quantization by focusing on rounding in preconditioner space, introducing two methods: Zero-Inclusive Preconditioner-space Stochastic Rounding (ZIP-SR) and Zero-Excluding EDEN calibration (ZE-EDEN). Experimental results demonstrate that both methods significantly reduce the mean validation-loss gap between the 4-bit AdamW and the 32-bit AdamW across various model sizes, with the largest reduction reaching 70%, while also achieving lower validation loss than the baseline during supervised fine-tuning tasks.</div>
+<div class="mono" style="margin-top:8px">本研究解决了量化AdamW优化器状态所面临的挑战，这可能导致量化误差影响自适应更新。作者提出了一种重新设计4位优化器状态量化的方法，重点关注预处理器空间中的舍入，引入了两种方法：零包含预处理器空间随机舍入（ZIP-SR）和零排除EDEN校准（ZE-EDEN）。实验结果表明，这两种方法在不同模型规模下显著减少了与32位AdamW的平均验证损失差距，最大减少幅度达到70%，同时在监督微调任务中保持了竞争力的性能。</div>
+</details>
+</div>
+<div class="card">
+<div class="title">Density Ratio Estimation with Stein Displacement Fields</div>
+<div class="meta-line">Authors: Song Liu</div>
+<div class="meta-line">First: 2026-10-08T17:57:33+00:00 · Latest: 2026-10-08T17:57:33+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.12437v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.12437v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Density ratios quantify distribution shift from a probability-mass point of view, whereas displacement fields describe, from a dynamical point of view, how one distribution is transported onto another. Although both offer complementary insights, they are usually estimated separately, and converting one into the other requires post-processing. In this paper, we estimate the density ratio between a target and a base distribution by parametrizing it through a displacement field acting on the base: the log-ratio is modeled as minus the Stein operator of the base applied to the field, up to a normalizing constant. This gives both statistical and dynamical descriptions of the distribution shift through a single convex optimization problem. Iterating this estimate-and-move step gives two inference algorithms: push-forward moves the model and corrects a pretrained sampler without retraining it, whereas pull-back moves the data closer to the base and fits a transformation model one layer at a time. Applications to distribution shift in simulation-based inference and to nonlinear independent component analysis illustrate the benefits and limitations of the approach.</div></details>
+<details class="detail"><summary>中文标题/摘要</summary>
+<div class="mono"><b>标题：</b>使用斯坦位移场的密度比估计</div>
+<div class="mono" style="margin-top:8px">密度比从概率质量的角度量化分布的变化，而位移场从动态的角度描述一个分布如何被转移到另一个分布上。尽管两者提供了互补的见解，但通常是单独估计的，且将一个转换为另一个需要后处理。本文通过参数化目标分布与基准分布之间的密度比，利用作用于基准的位移场进行估计：对数比被建模为基准的斯坦算子作用于该场的负值，加上一个归一化常数。这通过一个单一的凸优化问题提供了分布变化的统计和动态描述。迭代此估计和移动步骤产生了两个推断算法：推前移动模型并在不重新训练的情况下校正预训练的采样器，而拉回则将数据更接近基准，并逐层拟合变换模型。对基于仿真的推断中的分布变化和非线性独立成分分析的应用展示了该方法的优点和局限性。</div>
+</details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">The research is motivated by the need to understand distribution shifts from both probability-mass and dynamical perspectives, as traditional methods estimate density ratios and displacement fields separately. The authors propose a novel method that parametrizes the density ratio through a displacement field acting on a base distribution, modeling the log-ratio as the negative Stein operator applied to the field, which allows for a unified statistical and dynamical description via a single convex optimization problem. Key experimental findings demonstrate the effectiveness of two inference algorithms derived from this approach: the push-forward algorithm adjusts a pretrained sampler without retraining, while the pull-back algorithm refines the data towards the base distribution, showcasing applications in simulation-based inference and nonlinear independent component analysis.</div>
+<div class="mono" style="margin-top:8px">本研究的动机在于需要从概率质量和动态视角理解分布转移，因为传统方法分别估计密度比和位移场。作者提出了一种新方法，通过施加在基础分布上的位移场来参数化密度比，使用基础的Stein算子建模对数比。实验结果展示了从该方法衍生的两种推断算法的有效性：推前算法调整预训练的采样器，而拉回算法则将数据向基础分布精细化，展示了在基于仿真的推断和非线性独立成分分析中的应用。</div>
+</details>
+</div>
+<div class="card">
+<div class="title">Ecology of AI Agents: Collaboration Creates a Population Threshold for Takeoff</div>
+<div class="meta-line">Authors: Erin Crawley, Hidenori Tanaka</div>
+<div class="meta-line">First: 2026-10-08T17:57:32+00:00 · Latest: 2026-10-08T17:57:32+00:00</div>
+<div class="meta-line">Comments: 22 pages, 11 figures, 1 table</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.12436v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.12436v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">AI agents can now conduct real-world cyberattacks, scale up capabilities with the number of agents, and collectively pursue misaligned goals to obtain rewards. Together, these factors raise the risk of a population explosion of misaligned agents: agents could compromise computers and secretly deploy additional agents, creating a self-reinforcing cycle where larger populations develop greater collective cyber capability and expand further. This raises a fundamental question: What determines whether a population of misaligned agents remains contained or takes off into this self-reinforcing cycle? This population-level problem is ecological safety: unlike individual-agent or multi-agent safety with a fixed population, it concerns the dynamics of the population itself. Here, we develop an ecological theory of AI-agent populations based on a population growth equation in which fitness (growth rate) depends on cybersecurity capability. We show that, without collaboration, the population takes off only when individual-agent capability exceeds a critical threshold. With collaboration, however, collective cybersecurity capability increases with population size. This creates a critical population threshold: below it, the population declines; above it, the population takes off, even though individual-agent capability has not changed. In ecology, this phenomenon is known as the strong Allee effect. Because red teaming a small group of agents cannot guarantee ecological safety in larger populations, our theory calls for ecological red teaming and population pacing: gradually deploying larger agent populations in controlled environments, while measuring how cyber capability scales with population size, and estimating the critical population size for takeoff. Capability gains may lower this threshold, requiring re-estimation for each new model generation.</div></details>
+<details class="detail"><summary>中文标题/摘要</summary>
+<div class="mono"><b>标题：</b>人工智能代理的生态学：协作创造了起飞的人口阈值</div>
+<div class="mono" style="margin-top:8px">人工智能代理现在可以进行现实世界的网络攻击，随着代理数量的增加而提升能力，并共同追求不一致的目标以获得奖励。这些因素共同提高了不一致代理人口爆炸的风险：代理可能会妥协计算机并秘密部署额外的代理，形成一个自我强化的循环，使得更大的人口发展出更强的集体网络能力并进一步扩展。这引发了一个根本性的问题：是什么决定不一致代理的人口是保持受控还是进入这个自我强化的循环？这个人口层面的问题是生态安全：与固定人口的个体代理或多代理安全不同，它涉及到人口本身的动态。在这里，我们基于一个人口增长方程开发了人工智能代理人口的生态理论，其中适应度（增长率）依赖于网络安全能力。我们表明，在没有协作的情况下，只有当个体代理能力超过临界阈值时，人口才会起飞。然而，随着协作的进行，集体网络安全能力随着人口规模的增加而提高。这创造了一个关键的人口阈值：低于该阈值，人口下降；高于该阈值，人口起飞，即使个体代理能力没有变化。在生态学中，这种现象被称为强阿利效应。由于对小组代理进行红队测试无法保证在更大人口中的生态安全，我们的理论呼吁进行生态红队测试和人口节奏控制：在受控环境中逐步部署更大规模的代理人口，同时测量网络能力如何随人口规模变化，并估计起飞的关键人口规模。能力的提升可能会降低这一阈值，要求对每一代新模型进行重新估算。</div>
+</details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">The research investigates the ecological dynamics of AI agent populations, motivated by the potential for misaligned agents to engage in self-reinforcing cycles of cyber capability expansion. The authors develop a theoretical framework based on a population growth equation that links fitness to cybersecurity capability, revealing that without collaboration, a population only takes off when individual-agent capability surpasses a critical threshold. However, with collaboration, the collective cybersecurity capability increases with population size, establishing a critical population threshold where populations can either decline or take off, demonstrating the strong Allee effect. The findings suggest the need for ecological red teaming and controlled population pacing to ensure safety in larger populations of AI agents.</div>
+<div class="mono" style="margin-top:8px">本研究的动机在于理解决定不对齐的人工智能代理群体是否保持受控或升级为自我强化网络能力循环的动态。作者基于一个人口增长方程开发了生态理论，该方程中增长率受网络安全能力的影响。关键发现表明，在没有协作的情况下，代理群体只有在个体能力超过临界阈值时才会起飞；然而，在协作的情况下，集体网络安全能力随着群体规模的增加而增加，建立了一个决定群体动态的临界人口阈值。这表明，生态红队和受控人口节奏对于管理更大规模的人工智能代理群体是必要的。</div>
+</details>
+</div>
+<div class="card">
+<div class="title">MA-JEPA: Joint-Embedding World Models for Multi-Agent Reinforcement Learning</div>
+<div class="meta-line">Authors: Brandon Gary Kaplowitz, Osaze James Obahor, Christian Schroeder de Witt</div>
+<div class="meta-line">First: 2026-09-27T13:37:30+00:00 · Latest: 2026-10-08T17:57:30+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2609.33563v2">Abs</a> · <a href="https://arxiv.org/pdf/2609.33563v2">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">World models improve sample efficiency by training policies on imagined trajectories, but their usefulness depends on learning representations that capture the information needed for future control. We study whether self-supervised joint-embedding prediction (JEPA) can provide this learning signal for multi-agent reinforcement learning. We introduce MA-JEPA, a stochastic world model that replaces observation reconstruction with prediction of target representations, enabling model-based multi-agent reinforcement learning with centralized training and decentralized execution. A categorical latent state and a causal Transformer are trained with posterior and action-conditioned dynamics prediction objectives and are then used for actor-critic learning from latent imagination. A training-only joint predictor conditions on all agents&#x27; local states and actions to predict each agent&#x27;s next local observation embedding. These predictions are passed through the same local posterior used during real interaction with a centralized critic that is used only for value learning, with execution remaining decentralized. Our experiments show that this architecture performs strongly on SMAC, matching or exceeding the strongest reported comparator mean win rate on four of eight evaluated maps.</div></details>
+<details class="detail"><summary>中文标题/摘要</summary>
+<div class="mono"><b>标题：</b>MA-JEPA：用于多智能体强化学习的联合嵌入世界模型</div>
+<div class="mono" style="margin-top:8px">世界模型通过在想象的轨迹上训练策略来提高样本效率，但它们的有效性依赖于学习捕捉未来控制所需信息的表示。我们研究自监督联合嵌入预测（JEPA）是否能为多智能体强化学习提供这种学习信号。我们引入MA-JEPA，一种随机世界模型，用目标表示的预测替代观察重建，使基于模型的多智能体强化学习能够实现集中训练和分散执行。一个分类潜在状态和一个因果Transformer通过后验和动作条件动态预测目标进行训练，然后用于从潜在想象中进行演员-评论家学习。一个仅用于训练的联合预测器基于所有智能体的局部状态和动作来预测每个智能体的下一个局部观察嵌入。这些预测通过在与集中评论家进行真实交互时使用的相同局部后验进行处理，集中评论家仅用于价值学习，而执行保持分散。我们的实验表明，该架构在SMAC上表现强劲，在八个评估地图中的四个上匹配或超过了报告的最强比较者的平均胜率。</div>
+</details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">The motivation behind this research is to enhance sample efficiency in multi-agent reinforcement learning by utilizing world models that can effectively learn representations for future control. The authors propose MA-JEPA, a stochastic world model that employs self-supervised joint-embedding prediction to replace observation reconstruction with the prediction of target representations, facilitating model-based learning with centralized training and decentralized execution. Experimental results demonstrate that MA-JEPA achieves strong performance on the SMAC benchmark, matching or surpassing the highest reported mean win rates on four out of eight evaluated maps.</div>
+<div class="mono" style="margin-top:8px">该研究的动机在于通过改进世界模型来提高多智能体强化学习的样本效率，以有效捕捉未来控制所需的信息。作者提出了MA-JEPA，这是一种随机世界模型，利用自监督联合嵌入预测来促进基于模型的学习，采用集中训练和分散执行。实验结果表明，MA-JEPA在SMAC基准测试中表现强劲，在八个评估地图中的四个上匹配或超过了最高报告的平均胜率。</div>
+</details>
+</div>
+<div class="card">
+<div class="title">VioLA: Learning Generalist Humanoid Control Policies from Human Data</div>
+<div class="meta-line">Authors: Mert Albaba, Jens Beißwenger, Anna Manasyan, Daniel Marta, Michael J. Black, Wieland Brendel, Andreas Krause, Georg Martius, Martin Riedmiller</div>
+<div class="meta-line">First: 2026-10-08T17:57:27+00:00 · Latest: 2026-10-08T17:57:27+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.12435v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.12435v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Teaching a humanoid to follow instructions with its whole body runs into two obstacles. Its action space is large and tightly coupled: legs, arms, and fingers must move together while the robot keeps its balance, which makes joint-level actions hard to learn. And humanoid demonstrations are scarce, so current humanoid generalist policies do not follow new instructions out of the box and are fine-tuned on teleoperated demonstrations of each task before deployment. Human demonstrations exist in far larger numbers, but a person&#x27;s motion is not a robot command. We remove both obstacles by changing what the generalist policy predicts. We introduce VioLA, a generalist humanoid policy that predicts body and hand motion latents instead of joint commands. A pretrained body- and hand-controller execute these latents on the robot. Their corresponding motion encoders map human and robot motion into the same latent spaces. A human recording is therefore labeled in the policy&#x27;s action space, and the training demonstration pool contains 140.6 million frames, 93.2% of them human. As a result, VioLA follows locomotion instructions on the real robot zero-shot, without task-specific fine-tuning, reaching 100% success where GR00T N1.7 and $Ψ_0$ reach 16.7% and 0%, respectively. It also reaches 88.6% manipulation success without task-specific fine-tuning. The same approach works across two VLA and one world-action model backbones. A generalist policy trained on human demonstrations alone performs locomotion tasks on the real robot zero-shot. Code and checkpoints will be released.</div></details>
+<details class="detail"><summary>中文标题/摘要</summary>
+<div class="mono"><b>标题：</b>VioLA：从人类数据中学习通用类人控制策略</div>
+<div class="mono" style="margin-top:8px">教导类人机器人用全身遵循指令面临两个障碍。其动作空间大且紧密耦合：腿、手臂和手指必须协调移动，同时机器人保持平衡，这使得关节级动作难以学习。而类人演示稀缺，因此当前的类人通用策略无法直接遵循新指令，需在每个任务的遥控演示上进行微调后才能部署。人类演示数量远大于此，但一个人的动作并不是机器人的指令。我们通过改变通用策略的预测内容来消除这两个障碍。我们引入VioLA，一种预测身体和手部运动潜变量而非关节指令的通用类人策略。一个预训练的身体和手部控制器在机器人上执行这些潜变量。相应的运动编码器将人类和机器人运动映射到相同的潜在空间。因此，人类录音在策略的动作空间中被标记，训练演示池包含1.406亿帧，其中93.2%为人类数据。因此，VioLA在真实机器人上零-shot遵循运动指令，无需特定任务的微调，成功率达到100%，而GR00T N1.7和$Ψ_0$的成功率分别为16.7%和0%。在没有特定任务微调的情况下，它的操作成功率也达到了88.6%。相同的方法适用于两个VLA和一个世界动作模型骨干。仅在基于人类演示训练的通用策略在真实机器人上执行运动任务时实现零-shot。代码和检查点将会发布。</div>
+</details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">The motivation behind this research is to enable humanoid robots to follow instructions using their entire body, overcoming challenges related to the complexity of joint-level actions and the scarcity of humanoid demonstrations. The authors introduce VioLA, a generalist humanoid policy that predicts body and hand motion latents instead of joint commands, utilizing a pretrained controller to execute these latents. The experimental results show that VioLA can follow locomotion instructions on a real robot without any task-specific fine-tuning, achieving a 100% success rate compared to significantly lower rates of 16.7% and 0% for other models, and it also achieves an 88.6% success rate in manipulation tasks without fine-tuning.</div>
+<div class="mono" style="margin-top:8px">本研究的动机是使类人机器人能够使用其整个身体遵循指令，克服与大且耦合的动作空间以及类人演示稀缺相关的挑战。作者提出了VioLA，一种通用类人控制策略，它预测身体和手部运动潜变量，而不是关节命令，利用预训练的身体和手部控制器在机器人上执行这些潜变量。实验结果表明，VioLA能够在没有任务特定微调的情况下，在真实机器人上遵循运动指令，成功率达到100%，而现有模型的成功率分别为16.7%和0%；在操作任务中也达到了88.6%的成功率，证明了仅通过人类演示进行训练的有效性。</div>
+</details>
+</div>
+<div class="card">
+<div class="title">FAITH: Feasibility-Aware Safety-Filtered RL for High-Dimensional Systems</div>
+<div class="meta-line">Authors: Songyuan Zhang, Baljeet Singh, Sarthak Ranjeet Kaingade, Chuchu Fan, Bryan Trinh</div>
+<div class="meta-line">First: 2026-10-08T17:57:06+00:00 · Latest: 2026-10-08T17:57:06+00:00</div>
+<div class="meta-line">Comments: 8 pages, 7 figures</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.12432v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.12432v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Safe reinforcement learning commonly places safety and task performance in the same policy objective, where they can introduce competing updates. Safety filters separate them at action execution, but classical designs require an analytic safety function and dynamics model, and standard minimal-intervention filters are myopic to long-horizon task return because they minimize only instantaneous action deviation. Hard projections are also undefined when no safe action exists. We present FAITH, a feasibility-aware, model-free framework that approximates the optimal state-action safety value and amortizes minimal-intervention filtering with a feedforward network. The task policy optimizes the task return through the filtered dynamics, which recovers the feasible constrained problem without a competing safety term in the task-policy update. When no action satisfies the learned safety condition, the same filter approaches the action with minimum predicted peak harm. On a double integrator example and a Safety Gym environment, FAITH achieves the highest return among methods with no feasible-start violations and matches the lowest harm from infeasible starts. On a 29-DoF humanoid, it reaches a 99.95% safety rate while retaining 97% of the unfiltered return in Walking-Avoid, and obtains the highest measured safety rate in Push-Avoid by learning to sacrifice balancing and fall away from the protected region. The same policies are also demonstrated on a real-world Unitree G1 humanoid.</div></details>
+<details class="detail"><summary>中文标题/摘要</summary>
+<div class="mono"><b>标题：</b>FAITH：高维系统的可行性意识安全过滤强化学习</div>
+<div class="mono" style="margin-top:8px">安全强化学习通常将安全性和任务性能置于同一策略目标中，这可能导致相互竞争的更新。安全过滤器在动作执行时将它们分开，但经典设计需要解析的安全函数和动态模型，标准的最小干预过滤器对长时间任务回报是短视的，因为它们仅最小化瞬时动作偏差。当没有安全动作存在时，硬投影也是未定义的。我们提出了FAITH，一个可行性意识的无模型框架，近似最优状态-动作安全值，并通过前馈网络摊销最小干预过滤。任务策略通过过滤的动态优化任务回报，恢复可行的约束问题，而在任务策略更新中没有竞争的安全项。当没有动作满足学习的安全条件时，同一过滤器接近预测的最小峰值伤害的动作。在双积分器示例和安全健身环境中，FAITH在没有可行起始违规的情况下实现了最高回报，并匹配了不可行起始的最低伤害。在一个29自由度的人形机器人上，它在Walking-Avoid中达到了99.95%的安全率，同时保留了97%的未过滤回报，并通过学习牺牲平衡和远离保护区域，在Push-Avoid中获得了最高的测量安全率。同样的策略也在现实世界的Unitree G1人形机器人上得到了验证。</div>
+</details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">The motivation behind this research is to improve safety in reinforcement learning (RL) for high-dimensional systems, where traditional methods struggle with competing objectives of safety and task performance. The authors propose FAITH, a model-free framework that utilizes a feedforward network to approximate optimal state-action safety values and integrates minimal-intervention filtering without requiring an analytic safety function. Experimental results show that FAITH outperforms existing methods in terms of task return and safety, achieving a 99.95% safety rate on a 29-DoF humanoid while maintaining 97% of the unfiltered return in a Walking-Avoid task, and demonstrating the highest safety rate in a Push-Avoid task by effectively managing trade-offs in balancing.</div>
+<div class="mono" style="margin-top:8px">本研究的动机在于提高高维系统中强化学习（RL）的安全性，而传统方法在安全性和任务性能的竞争目标上存在困难。作者提出了FAITH，这是一种无模型框架，利用前馈网络来近似最优状态-动作安全值，并整合最小干预过滤，以增强长时间任务回报而不产生冲突的安全项。实验结果表明，FAITH在任务回报和安全性方面优于现有方法，在29自由度的人形机器人上实现了99.95%的安全率，同时在Walking-Avoid中保持了97%的未过滤回报，并在Unitree G1人形机器人等实际应用中也显示出高安全率。</div>
+</details>
+</div>
+<div class="card">
+<div class="title">Learning Projection-Aware 360-Degree Image Rectification via Dual-Projection Fusion</div>
+<div class="meta-line">Authors: Yuhao Shan, Qianyi Yuan, Jingguo Liu, Shigang Li, Jianfeng Li, Tong Chen</div>
+<div class="meta-line">First: 2025-11-30T14:28:21+00:00 · Latest: 2026-10-08T17:56:11+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2512.00911v2">Abs</a> · <a href="https://arxiv.org/pdf/2512.00911v2">PDF</a> · <a href="https://github.com/YuhaoShine/DualProjectionFusion">Code1</a> · <a href="https://huggingface.co/huggingface">Code2</a> · <a href="https://huggingface.co/docs/hub/spaces">Code3</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Panoramic cameras provide a 360° field of view and are widely used in panoramic vision, immersive visual computing, and robotic perception. However, changes in camera orientation can produce non-upright panoramas, introducing geometric variations that can complicate downstream visual analysis. Existing vision-based rectification methods usually operate within a single projection domain, limiting their ability to jointly exploit local geometric structures and global contextual information. To address this, we formulate 360° image rectification as a projection-aware representation learning problem and propose a dual-projection framework for upright panoramic rectification. A convolutional neural network branch captures local geometric structures from equirectangular projection (ERP) inputs, while a vision transformer branch models global contextual cues from cubemap projections. Cross-projection feature transformation and multi-level feature fusion enable effective interaction between these complementary representations. The learned representation supports collaborative inclination estimation and upright panorama generation, with the two tasks providing complementary geometric and appearance supervision. Experiments on SUN360 and M3D show consistent improvements over existing methods, achieving accuracies within a 1° error threshold of 65.9% and 85.2% and Fréchet Inception Distance scores of 5.87 and 3.26, respectively. Ablation studies verify the contributions of dual-projection representation, cross-projection feature transformation and fusion, and collaborative multi-task learning. The proposed framework provides a projection-aware visual computing approach for panoramic rectification. Code, pretrained models, and training/testing scripts are available at https://github.com/YuhaoShine/DualProjectionFusion.</div></details>
+<details class="detail"><summary>中文标题/摘要</summary>
+<div class="mono"><b>标题：</b>基于投影感知的360度图像校正学习通过双投影融合</div>
+<div class="mono" style="margin-top:8px">全景相机提供360°视场，广泛应用于全景视觉、沉浸式视觉计算和机器人感知。然而，相机方向的变化可能导致非直立全景，产生几何变化， complicating downstream visual analysis。现有的基于视觉的校正方法通常在单一投影域内操作，限制了它们共同利用局部几何结构和全局上下文信息的能力。为此，我们将360°图像校正表述为一个投影感知的表示学习问题，并提出一个用于直立全景校正的双投影框架。卷积神经网络分支从等矩形投影（ERP）输入中捕获局部几何结构，而视觉变换器分支则从立方体映射投影中建模全局上下文线索。跨投影特征转换和多级特征融合使这些互补表示之间能够有效交互。学习到的表示支持协同倾斜估计和直立全景生成，这两个任务提供互补的几何和外观监督。在SUN360和M3D上的实验显示出相对于现有方法的一致改进，准确率在1°误差阈值内分别达到65.9%和85.2%，Fréchet Inception Distance得分分别为5.87和3.26。消融研究验证了双投影表示、跨投影特征转换与融合以及协同多任务学习的贡献。所提出的框架为全景校正提供了一种投影感知的视觉计算方法。代码、预训练模型和训练/测试脚本可在https://github.com/YuhaoShine/DualProjectionFusion获取。</div>
+</details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">The motivation behind this research is to improve the rectification of non-upright panoramas produced by panoramic cameras, which complicate visual analysis due to geometric variations. The authors propose a dual-projection framework that combines a convolutional neural network to capture local geometric structures from equirectangular projections and a vision transformer to model global contextual cues from cubemap projections. Experimental results on the SUN360 and M3D datasets demonstrate significant improvements over existing methods, achieving accuracy rates of 65.9% and 85.2% within a 1° error threshold, along with Fréchet Inception Distance scores of 5.87 and 3.26, respectively, while ablation studies confirm the effectiveness of the proposed dual-projection representation and collaborative learning approach.</div>
+<div class="mono" style="margin-top:8px">本研究的动机在于改善全景相机拍摄的360°图像的校正，这些图像由于相机方向的变化而常常出现几何变形。作者提出了一种双投影框架，利用卷积神经网络从等矩形投影中捕捉局部几何结构，并使用视觉变换器从立方体图投影中建模全局上下文线索。对SUN360和M3D数据集的实验结果表明，所提出的方法在现有技术上取得了显著改善，在1°误差阈值内的准确率分别为65.9%和85.2%，Fréchet Inception Distance得分分别为5.87和3.26，证实了双投影表示和协作多任务学习方法的有效性。</div>
+</details>
+</div>
+<div class="card">
+<div class="title">Toward Joint Optimization of Circuit Depth and Training Data Size in Adaptively Grown Quantum Classifiers</div>
+<div class="meta-line">Authors: Saeefa Rubaiyet Nowmi, Md Mahmuduzzaman Kamol, Mohammad Saidur Rahman</div>
+<div class="meta-line">Venue: NeurIPS 2026</div>
+<div class="meta-line">First: 2026-10-08T17:55:57+00:00 · Latest: 2026-10-08T17:55:57+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.12428v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.12428v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Building a quantum model involves a tradeoff: how complex the circuit should be, and how much training data it needs. Caro et al. show that models with fewer trainable gates need less training data to generalize well. Q-FLAIR shows that a quantum feature-map circuit can be grown gate-by-gate, stopping once further growth stops improving the training loss. We ask whether these two results combine into a predictable scaling law. Does Q-FLAIR&#x27;s own stopping rule pick larger or smaller circuits as training data grows? Does the resulting generalization behavior track Caro et al.&#x27;s bound?
+  We reimplement Q-FLAIR&#x27;s growth mechanism faithfully, including its analytic reconstruction and exact stopping rule. We run it on full-resolution (784-pixel) MNIST 3-vs-5 classification, at five training-set sizes from N = 2000 to 10000. We then fine-tune each resulting circuit, so we can measure Caro et al.&#x27;s notion of active gates, K.
+  We find no predictable relationship between training-set size and the circuit size Q-FLAIR converges to. Circuit size and test accuracy both vary non-monotonically with N, and seed-to-seed variance is nearly as large as any trend across N. The empirical generalization gap never exceeds Caro et al.&#x27;s bound in 14 of 15 runs, so the bound holds as a valid guarantee in those runs. But the gap correlates only weakly with the bound&#x27;s value (r = 0.12). This shows that K does not explain most of the variation we observe. Why a valid guarantee can coexist with such weak predictive power remains an open question, and answering it may be necessary before circuit depth and training data size can be jointly optimized in practice.</div></details>
+<details class="detail"><summary>中文标题/摘要</summary>
+<div class="mono"><b>标题：</b>朝着自适应增长量子分类器的电路深度和训练数据大小的联合优化</div>
+<div class="mono" style="margin-top:8px">构建量子模型涉及权衡：电路的复杂性和所需的训练数据量。Caro等人表明，具有较少可训练门的模型需要更少的训练数据以良好泛化。Q-FLAIR显示量子特征映射电路可以逐门增长，停止在进一步增长不再改善训练损失时。我们询问这两个结果是否结合成一个可预测的缩放法则。Q-FLAIR自身的停止规则在训练数据增长时选择更大还是更小的电路？结果的泛化行为是否跟踪Caro等人的界限？我们忠实地重新实现了Q-FLAIR的增长机制，包括其解析重构和精确停止规则。我们在全分辨率（784像素）MNIST 3对5分类上运行，训练集大小从N = 2000到10000。然后我们微调每个结果电路，以便测量Caro等人关于活跃门的概念K。我们发现训练集大小与Q-FLAIR收敛的电路大小之间没有可预测的关系。电路大小和测试准确性都随着N非单调变化，种子间的方差几乎与N的任何趋势一样大。在15次运行中，经验泛化间隙在14次中从未超过Caro等人的界限，因此在这些运行中该界限作为有效保证成立。但该间隙与界限值的相关性很弱（r = 0.12）。这表明K并不能解释我们观察到的大部分变化。有效保证为何能与如此弱的预测能力共存仍然是一个未解的问题，回答这个问题可能在实践中联合优化电路深度和训练数据大小之前是必要的。</div>
+</details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">The motivation behind this research is to explore the tradeoff between circuit complexity and the amount of training data required for quantum models, particularly in the context of Q-FLAIR&#x27;s adaptive growth mechanism. The authors reimplemented Q-FLAIR&#x27;s growth mechanism and tested it on the MNIST dataset for 3-vs-5 classification, varying training set sizes from 2000 to 10000. The key findings indicate that there is no predictable relationship between training set size and the circuit size that Q-FLAIR converges to, with both circuit size and test accuracy showing non-monotonic variations. Additionally, while the empirical generalization gap does not exceed the bounds established by Caro et al. in most runs, it correlates weakly with the bound&#x27;s value, suggesting that the concept of active gates does not account for most of the observed variation, leaving the question of optimizing circuit depth and training data size unresolved.</div>
+<div class="mono" style="margin-top:8px">本研究探讨了量子分类器中电路复杂性与训练数据大小之间的权衡，旨在提高模型训练的效率。作者重新实现了Q-FLAIR生长机制，并在MNIST数据集上进行实验，训练集大小从2000到10000不等。研究结果显示，训练集大小与电路大小之间没有可预测的关系，两者均呈非单调变化，尽管在15次实验中有14次的经验泛化间隙保持在Caro等人设定的界限内，但与界限值的相关性较弱，表明活跃门的概念并未解释大多数观察到的变化。</div>
+</details>
+</div>
+<div class="card">
+<div class="title">FastBench: Can Streaming VLMs Perceive High-Dynamic Real-World Streams?</div>
+<div class="meta-line">Authors: Yuxuan Hu, Weikang Shi, Yang Bo, Xudong Lu, Xintong Guo, Shuhan Li, Yuyang He, Huankang Guan, Peiwen Sun, Yunqiao Yang, Wenbo Li, Rui Liu, Hongsheng Li</div>
+<div class="meta-line">First: 2026-10-08T17:55:20+00:00 · Latest: 2026-10-08T17:55:20+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.12427v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.12427v1">PDF</a> · <a href="https://github.com/Ashone3/FastBench">Code1</a> · <a href="https://huggingface.co/huggingface">Code2</a> · <a href="https://huggingface.co/docs/hub/spaces">Code3</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Streaming Video Large Language Models (VLMs) enable continuous video understanding, yet existing benchmarks focus on low-dynamic scenarios. Under bounded context budgets, models must balance temporal history, spatial resolution, and temporal granularity; sparse sampling at 1--2 FPS misses fast events. We introduce FastBench to evaluate high-dynamic perception in real-world video streams. Its trajectory-grounded pipeline combines QA generation from high-FPS clips, filtering of questions answerable at 2 FPS, answer verification using SAM3 and CoTracker3 trajectories, and three rounds of human inspection. FastBench contains 306 QA pairs across eight domains, six capabilities, and forward, instant, and backward temporal scopes, with human-annotated evidence intervals. We also present ProactiveFrame, a training-free baseline that adjusts incoming frame rates through text tokens. A dual-tier sliding window retains recent high-FPS observations while downsampling older ones into sparse history. Experiments reveal substantial limitations: the strongest model, Gemini-3.5-Flash, scores only 50.7%. Denser sampling improves Qwen3-VL-8B from 32.9% at 2 FPS to 44.6% at 24 FPS, but gains saturate as history is compressed. ProactiveFrame outperforms sparse uniform sampling by 5.4 and 1.5 percentage points, yet remains well below oracle-guided focusing, showing that current VLMs struggle to determine from the stream alone when finer temporal perception is needed. FastBench provides a testbed for high-dynamic streaming video understanding. Code and data: https://github.com/Ashone3/FastBench.</div></details>
+<details class="detail"><summary>中文标题/摘要</summary>
+<div class="mono"><b>标题：</b>FastBench：流媒体 VLM 能否感知高动态真实世界流？</div>
+<div class="mono" style="margin-top:8px">流媒体视频大型语言模型（VLM）实现了连续视频理解，但现有基准主要集中在低动态场景。在有限的上下文预算下，模型必须平衡时间历史、空间分辨率和时间粒度；以 1-2 FPS 的稀疏采样会错过快速事件。我们引入 FastBench 来评估真实视频流中的高动态感知。其轨迹基础管道结合了来自高 FPS 剪辑的 QA 生成、可在 2 FPS 下回答的问题过滤、使用 SAM3 和 CoTracker3 轨迹的答案验证，以及三轮人工检查。FastBench 包含跨八个领域、六种能力的 306 对 QA 及前向、即时和后向时间范围，并附有人工标注的证据区间。我们还提出了 ProactiveFrame，这是一种无训练的基线，通过文本标记调整输入帧率。双层滑动窗口保留最近的高 FPS 观察，同时将较旧的观察降采样为稀疏历史。实验揭示了显著的局限性：最强模型 Gemini-3.5-Flash 仅得分 50.7%。更密集的采样使 Qwen3-VL-8B 从 2 FPS 的 32.9% 提升至 24 FPS 的 44.6%，但随着历史的压缩，增益饱和。ProactiveFrame 比稀疏均匀采样高出 5.4 和 1.5 个百分点，但仍远低于基于 oracle 的聚焦，显示当前 VLM 在仅从流中判断何时需要更细致的时间感知方面存在困难。FastBench 为高动态流媒体视频理解提供了一个测试平台。代码和数据：https://github.com/Ashone3/FastBench。</div>
+</details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">The motivation behind this research is to address the limitations of existing benchmarks for Streaming Video Large Language Models (VLMs), which primarily focus on low-dynamic scenarios, thereby neglecting high-dynamic real-world video streams. The authors introduce FastBench, a novel evaluation framework that assesses high-dynamic perception by generating question-answer pairs from high-FPS video clips and verifying answers through trajectory analysis and human inspection. Experimental results indicate that even the best-performing model, Gemini-3.5-Flash, achieves only a 50.7% accuracy, while denser sampling improves Qwen3-VL-8B&#x27;s performance from 32.9% at 2 FPS to 44.6% at 24 FPS, highlighting the challenges VLMs face in adapting to varying temporal dynamics in video streams.</div>
+<div class="mono" style="margin-top:8px">本研究的动机在于解决现有流媒体视频大型语言模型（VLM）基准的局限性，这些基准主要集中在低动态场景，忽视了高动态真实世界视频流。作者提出了FastBench，这是一种新的评估框架，通过利用基于轨迹的管道来评估高动态感知，包括从高帧率视频片段生成问答、筛选可在较低帧率下回答的问题以及严格的人类检查。实验结果表明，即使是表现最好的模型Gemini-3.5-Flash，准确率也仅为50.7%，而更密集的采样使Qwen3-VL-8B的表现从2 FPS下的32.9%提高到24 FPS下的44.6%，突显了VLM在流媒体环境中适应不同时间感知的挑战。</div>
+</details>
+</div>
+<div class="card">
+<div class="title">RoboRSI: Stable, efficient, and reusable robot self-evolution in complex real-world environments</div>
+<div class="meta-line">Authors: Zimo Wen, Yijin Chen, Yuxuan Cao, Wendi Chen, Yanwen Zou, Wenye Yu, Fuhang Kuang, Han Xue, Jun Lv, Chuan Wen, Cewu Lu</div>
+<div class="meta-line">First: 2026-10-08T17:55:12+00:00 · Latest: 2026-10-08T17:55:12+00:00</div>
+<div class="meta-line">Comments: project page:https://lab.noematrix.ai/blog/2-roborsi/</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.12424v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.12424v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a> · <a href="https://lab.noematrix.ai/blog/2-roborsi/">Project1</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">A generalist robot should not only perform diverse tasks but also improve through experience, turning what it learns during execution into capabilities that later tasks can reuse. Robot agents that act through code can already repair programs from execution feedback, yet it remains a central challenge to organize this experience around the task structure that gives it meaning, so that each repair is attributed to the responsible capability, supported by execution evidence, and validated before it is reused. We introduce RoboRSI, a robot self-improvement system built on Top-Down Skill Refinement (TSR). TSR decomposes tasks into compound, atomic, and base skills with scoped responsibilities and explicit input--output contracts, attributes each execution outcome to the responsible branch, and confines revision to that branch. Building upon this structure, a Manager, Planner, Engineer, and Reviewer coordinate planning, execution, diagnosis, and the validated release of new skills, while people steer the process through objectives and corrections; stable skill sequences are further consolidated into reusable compound skills. On a mobile manipulator, RoboRSI develops multi-object household cleanup over 104 rounds. In simulation, it achieves the highest success rate on LIBERO, LIBERO-PRO, LIBERO-Plus, and RoboTwin, exceeding the strongest baseline by 2.7 to 11.0 percentage points.</div></details>
+<details class="detail"><summary>中文标题/摘要</summary>
+<div class="mono"><b>标题：</b>RoboRSI：在复杂现实环境中稳定、高效且可重用的机器人自我进化</div>
+<div class="mono" style="margin-top:8px">通用机器人不仅应执行多样化任务，还应通过经验提升自身能力，将执行过程中学到的知识转化为后续任务可重用的能力。通过代码行动的机器人代理已经能够根据执行反馈修复程序，但围绕赋予经验意义的任务结构组织这些经验仍然是一个核心挑战，以便每次修复都归因于负责的能力，并通过执行证据支持，在重用之前进行验证。我们介绍了RoboRSI，一个基于自上而下技能细化（TSR）的机器人自我改进系统。TSR将任务分解为复合、原子和基础技能，具有明确的责任范围和输入-输出合同，将每次执行结果归因于负责的分支，并将修订限制在该分支内。在此结构基础上，管理者、规划者、工程师和审查员协调规划、执行、诊断和新技能的验证发布，而人类通过目标和修正引导过程；稳定的技能序列进一步整合为可重用的复合技能。在一个移动操控器上，RoboRSI在104轮中开发了多对象家庭清理。在仿真中，它在LIBERO、LIBERO-PRO、LIBERO-Plus和RoboTwin上实现了最高成功率，超过最强基线2.7到11.0个百分点。</div>
+</details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">The motivation behind this research is to enhance the capabilities of generalist robots by enabling them to learn from experience and improve their performance on diverse tasks. The authors introduce RoboRSI, a robot self-improvement system that employs Top-Down Skill Refinement (TSR) to systematically decompose tasks into various skill levels, allowing for organized experience management and skill validation. Experimental results demonstrate that RoboRSI successfully develops multi-object household cleanup skills over 104 rounds on a mobile manipulator, achieving superior success rates in simulation environments compared to existing baselines, with improvements ranging from 2.7 to 11.0 percentage points.</div>
+<div class="mono" style="margin-top:8px">本研究的动机在于使机器人不仅能够执行多种任务，还能通过经验提升其能力，从而使学习到的技能可在未来任务中重复使用。作者提出了RoboRSI，这是一种机器人自我改进系统，采用自上而下的技能细化（TSR）方法，系统地将任务分解为可管理的技能，从而有效组织执行反馈和技能修订。实验结果表明，RoboRSI在移动操纵器上成功开发了多对象家庭清理技能，并在104轮实验中在模拟环境中表现优越，在各个基准测试中超越了最佳基线2.7到11.0个百分点。</div>
+</details>
+</div>
+<div class="card">
+<div class="title">Beyond Spatio-Temporal Priors: A Generalizable Approach for Dense Correspondence Matching</div>
+<div class="meta-line">Authors: Luping Liu, Bingyi Kang, Yifan Wang, Dong Xu</div>
+<div class="meta-line">Venue: NeurIPS 2026</div>
+<div class="meta-line">First: 2026-10-08T17:53:04+00:00 · Latest: 2026-10-08T17:53:04+00:00</div>
+<div class="meta-line">Comments: Accepted at NeurIPS 2026. 24 pages, 7 figures, including appendices</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.12421v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.12421v1">PDF</a> · <a href="https://github.com/luping-liu/FreeMatching">Code1</a> · <a href="https://huggingface.co/huggingface">Code2</a> · <a href="https://huggingface.co/docs/hub/spaces">Code3</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Dense correspondence matching has historically been bounded by simplifying spatio-temporal priors, such as smooth motion and rigid geometry. While effective for classical tasks, these assumptions break down in image editing and reference-guided generation (IEG), where transformations can preserve visual identity while breaking physical continuity. To establish identity-preserving correspondence across such transformations, we introduce FreeMatching, a generalizable framework combining generative and semantic foundation representations with heterogeneous supervision from classical datasets, tracked videos, and synthetic scenes. Teacher-guided iterative refinement further improves correspondence in IEG without dense correspondence annotations. Experimentally, a single FreeMatching model substantially improves correspondence quality on challenging IEG image pairs while retaining competitive performance on classical benchmarks. Furthermore, we demonstrate its utility as a quantitative metric for evaluating identity preservation, with scores that correlate with human judgment. The code is available at https://github.com/luping-liu/FreeMatching.</div></details>
+<details class="detail"><summary>中文标题/摘要</summary>
+<div class="mono"><b>标题：</b>超越时空先验：一种可推广的密集对应匹配方法</div>
+<div class="mono" style="margin-top:8px">密集对应匹配历史上受到简化时空先验的限制，如平滑运动和刚性几何。虽然这些假设在经典任务中有效，但在图像编辑和参考引导生成（IEG）中，这些假设失效，因为变换可以在保持视觉身份的同时打破物理连续性。为了在这些变换中建立保持身份的对应关系，我们引入了FreeMatching，这是一种可推广的框架，结合了生成和语义基础表示以及来自经典数据集、跟踪视频和合成场景的异构监督。教师引导的迭代优化进一步改善了IEG中的对应关系，而无需密集对应注释。实验表明，单个FreeMatching模型在具有挑战性的IEG图像对上显著提高了对应质量，同时在经典基准上保持了竞争性能。此外，我们展示了其作为评估身份保持的定量指标的实用性，其得分与人类判断相关。代码可在https://github.com/luping-liu/FreeMatching获取。</div>
+</details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">The research addresses the limitations of traditional spatio-temporal priors in dense correspondence matching, particularly in the context of image editing and reference-guided generation where physical continuity may not be preserved. The authors propose FreeMatching, a novel framework that integrates generative and semantic representations with diverse supervision sources, including classical datasets and tracked videos. Experimental results show that FreeMatching significantly enhances correspondence quality for challenging image pairs in image editing tasks while maintaining strong performance on standard benchmarks, and it also serves as an effective quantitative metric for assessing identity preservation, correlating well with human evaluations.</div>
+<div class="mono" style="margin-top:8px">本研究的动机在于解决传统时空先验在密集对应匹配中的局限性，特别是在图像编辑和参考引导生成的背景下，这些情况下视觉身份在非物理变换中得以保持。作者提出了FreeMatching，这是一种通用框架，结合了生成和语义表示，并利用来自各种数据源的多样化监督。实验结果表明，FreeMatching显著提高了在IEG任务中具有挑战性的图像对的对应质量，同时在标准基准测试中保持了良好的性能，并且它还作为评估身份保留的有效定量指标，与人类评估结果高度一致。</div>
+</details>
+</div>
+<div class="card">
+<div class="title">A Unified Bellman Operator for Safety-Critical Reinforcement Learning</div>
+<div class="meta-line">Authors: Nishanth Arun Rao, Royina Karegoudra Jayanth, Benjamin Eysenbach, Jaime Fernández Fisac</div>
+<div class="meta-line">First: 2026-10-08T17:53:02+00:00 · Latest: 2026-10-08T17:53:02+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.12420v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.12420v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Reinforcement learning in safety-critical domains requires maximizing task performance while strictly adhering to safety constraints. Existing safe reinforcement learning paradigms typically force a trade-off: they either require a priori knowledge to provide strict safety guarantees (e.g., safety filters), or they enable joint learning but only satisfy safety constraints on average. In this work, we propose a novel Bellman operator that unifies performance and safety objectives into a joint value function. We show that temporal difference learning with the joint Bellman operator converges under a two-timescale stochastic approximation framework. On the fast timescale, the safety value of the learning joint policy is estimated, while the joint value is estimated on the slow timescale. Convergence is ensured by formulating the limiting dynamics as an occupation-averaged differential inclusion, and showing that it asymptotically converges to a set of limiting optimal safety-constrained task value functions. Theoretically, once converged, the resulting optimal policy maximizes task return while maintaining safety at all times. Empirical evaluations on continuous control tasks with neural approximations demonstrate stable convergence with near-zero safety violations at test time.</div></details>
+<details class="detail"><summary>中文标题/摘要</summary>
+<div class="mono"><b>标题：</b>安全关键强化学习的统一贝尔曼算子</div>
+<div class="mono" style="margin-top:8px">安全关键领域的强化学习需要在严格遵守安全约束的同时最大化任务性能。现有的安全强化学习范式通常迫使进行权衡：它们要么需要先验知识以提供严格的安全保证（例如，安全过滤器），要么允许联合学习但仅在平均上满足安全约束。在本研究中，我们提出了一种新颖的贝尔曼算子，将性能和安全目标统一为一个联合价值函数。我们证明了使用联合贝尔曼算子的时间差分学习在双时间尺度随机逼近框架下收敛。在快速时间尺度上，学习联合策略的安全价值被估计，而联合价值在慢速时间尺度上被估计。通过将极限动态公式化为占用平均微分包含，确保收敛，并表明其渐近收敛到一组极限最优安全约束任务价值函数。从理论上讲，一旦收敛，得到的最优策略在任何时候都能最大化任务回报，同时保持安全。在使用神经近似的连续控制任务上的实证评估表明，收敛稳定，测试时几乎没有安全违规。</div>
+</details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">The motivation behind this research is to address the challenge of maximizing task performance in safety-critical reinforcement learning while adhering to safety constraints. The authors propose a novel Bellman operator that integrates performance and safety objectives into a unified value function, allowing for joint learning without compromising safety. Their method demonstrates convergence through temporal difference learning within a two-timescale stochastic approximation framework, leading to an optimal policy that maximizes task return while ensuring safety, as evidenced by empirical evaluations showing stable convergence and minimal safety violations in continuous control tasks with neural approximations.</div>
+<div class="mono" style="margin-top:8px">本研究的动机在于解决安全关键领域中强化学习的挑战，在这些领域中，必须在遵守安全约束的同时最大化任务性能。作者提出了一种新的贝尔曼算子，将性能和安全目标整合为统一的价值函数，并利用双时间尺度随机逼近框架进行时间差学习。关键实验结果表明，该方法确保了稳定收敛，并在测试期间实现了接近零的安全违规，证明了最优策略能够在任何时候最大化任务回报的同时保持安全。</div>
+</details>
+</div>
+<div class="card">
+<div class="title">OneSearch-VL: Unified Multimodal Deep Research Agent for Image and Video</div>
+<div class="meta-line">Authors: Hongyu Li, Manyuan Zhang, Kaituo Feng, Shu Chen, Dian Zheng, Hao Li, Hao Yu, Zhangquan Chen, Zoey Guo, Ray Zhang, Shaofei Huang, Tianrui Hui, Linjiang Huang, Si Liu</div>
+<div class="meta-line">First: 2026-10-08T17:52:46+00:00 · Latest: 2026-10-08T17:52:46+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.12419v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.12419v1">PDF</a> · <a href="https://github.com/appletea233/OneSearch-VL">Code1</a> · <a href="https://huggingface.co/huggingface">Code2</a> · <a href="https://huggingface.co/docs/hub/spaces">Code3</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Single-image, multi-image, and video deep research require different visual operations but share a workflow of visual grounding, external retrieval, and fact composition. A key challenge is to preserve the dependencies linking localized visual anchors, entity relations, source-supported facts, and answer-producing operations. We introduce OneSearch-VL, a unified agent centered on the Visually Grounded Evidence Graph (VGEG), which encodes these dependencies as a shared task-level reference for data construction, process supervision, and operation-level evaluation. Our VGEG-based data engine constructs and verifies multi-image and video questions and filters expert trajectories. Using these data, we assemble OneSearch-VL-SFT-110K and OneSearch-VL-RL-10K for SFT and RL, respectively. We further derive the Evidence-aware Visual-Grounded Rubric reward (EVGR) from VGEG annotations to supervise evidence traceability and visual grounding during RL. For fine-grained evaluation, we construct OneSearch-MI-Bench and OneSearch-Video-Bench, organizing questions by the research operations encoded in their VGEGs. Experiments show that OneSearch-VL-8B improves over Qwen3-VL-8B with tool access by 20.2 and 17.6 percentage points on the two new benchmarks, respectively, while also achieving substantial gains across 7 image benchmarks and VideoDR. Project repository: https://github.com/appletea233/OneSearch-VL</div></details>
+<details class="detail"><summary>中文标题/摘要</summary>
+<div class="mono"><b>标题：</b>OneSearch-VL：图像和视频的统一多模态深度研究代理</div>
+<div class="mono" style="margin-top:8px">单图像、多图像和视频深度研究需要不同的视觉操作，但共享视觉定位、外部检索和事实组合的工作流程。一个关键挑战是保持局部视觉锚点、实体关系、源支持事实和生成答案操作之间的依赖关系。我们引入了OneSearch-VL，一个以视觉基础证据图（VGEG）为中心的统一代理，它将这些依赖关系编码为数据构建、过程监督和操作级评估的共享任务级参考。我们的基于VGEG的数据引擎构建和验证多图像和视频问题，并过滤专家轨迹。利用这些数据，我们分别为SFT和RL组装了OneSearch-VL-SFT-110K和OneSearch-VL-RL-10K。我们进一步从VGEG注释中推导出证据感知视觉基础评分奖励（EVGR），以监督RL期间的证据可追溯性和视觉定位。为了进行细粒度评估，我们构建了OneSearch-MI-Bench和OneSearch-Video-Bench，根据其VGEG中编码的研究操作组织问题。实验表明，OneSearch-VL-8B在两个新基准上分别比Qwen3-VL-8B提高了20.2和17.6个百分点，同时在7个图像基准和VideoDR上也取得了显著提升。项目仓库：https://github.com/appletea233/OneSearch-VL</div>
+</details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">The research is motivated by the need for a unified approach to deep research across single images, multiple images, and videos, which require different visual operations but share a common workflow. The authors introduce OneSearch-VL, a unified agent based on the Visually Grounded Evidence Graph (VGEG) that encodes dependencies among visual anchors, entity relations, and operations. Experimental results demonstrate that OneSearch-VL-8B outperforms Qwen3-VL-8B by 20.2 and 17.6 percentage points on two new benchmarks, while also achieving significant improvements across seven image benchmarks and VideoDR.</div>
+<div class="mono" style="margin-top:8px">本研究的动机在于解决单图像、多图像和视频深度研究中的挑战，这些研究需要不同的视觉操作但共享相同的工作流程。作者提出了OneSearch-VL，一个统一的多模态深度研究代理，利用视觉基础证据图（VGEG）来编码视觉锚点、实体关系和事实之间的依赖关系。实验结果表明，OneSearch-VL-8B在两个新基准上分别比Qwen3-VL-8B提高了20.2和17.6个百分点，同时在七个图像基准和VideoDR上也显示出显著的改进。</div>
+</details>
+</div>
+<div class="card">
+<div class="title">WOVEN: Weaving Visual World Modeling into Multimodal LLMs</div>
+<div class="meta-line">Authors: Zheyu Fan, Yue Zhang, Mingkai Deng, Kangrui Wang, Qineng Wang, Canyu Chen, Jie Hao, Xing Fan, Chenlei Guo, Eric P. Xing, Mohit Bansal, Manling Li</div>
+<div class="meta-line">First: 2026-10-08T17:52:03+00:00 · Latest: 2026-10-08T17:52:03+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.12417v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.12417v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Multimodal large language models (MLLMs) struggle with spatial, embodied, physical, and temporal reasoning. We hypothesize that these failures reflect a shared deficit in visual transition reasoning, and test whether this capability can serve as a shared training primitive, one that different models can learn from different supervision sources and reuse across different tasks, with a systematic training recipe. Existing benchmarks document these deficits separately but do not support controlled comparisons across scenes, actions, and reasoning operations. We therefore introduce WOVEN, a training source and benchmark for visual transition reasoning that organizes transition supervision by scene, action, and reasoning type, using diverse, realistic rollouts from video-pretrained generative models: 36,076 examples across 20 scene types, 5 action types, and 8 reasoning types. We first evaluate 38 frontier MLLMs (e.g., GPT-5.4 and Qwen3-VL-235B-A22B) and find a substantial and systematic deficit: even the strongest models fall far below humans, and the failures recur across model families and persist with scale. We then train MLLMs at multiple scales on WOVEN and find that they learn a shared capability that transfers broadly: training subsets of only about 2,000 items each collectively improve 22 of 26 external benchmarks by up to 27.3 percentage points, and WOVEN data can replace 30-50% of a task&#x27;s own training data with comparable accuracy. Controlled comparisons further yield a training recipe for visual world modeling, validated prospectively on held-out benchmarks: select supervision by the reasoning operation it teaches rather than by the actions, scenes, or domains it shows, and prefer larger changes to the visual state for robustness. Our work establishes visual transition reasoning as a reusable foundation for systematic visual world-model training in MLLMs.</div></details>
+<details class="detail"><summary>中文标题/摘要</summary>
+<div class="mono"><b>标题：</b>WOVEN：将视觉世界建模融入多模态大语言模型</div>
+<div class="mono" style="margin-top:8px">多模态大语言模型（MLLMs）在空间、具身、物理和时间推理方面存在困难。我们假设这些失败反映了视觉转移推理的共同缺陷，并测试这种能力是否可以作为一个共享的训练原语，不同模型可以从不同的监督来源学习并在不同任务中重用，采用系统的训练方案。现有基准分别记录了这些缺陷，但不支持跨场景、动作和推理操作的受控比较。因此，我们引入了WOVEN，这是一个视觉转移推理的训练来源和基准，通过场景、动作和推理类型组织转移监督，使用来自视频预训练生成模型的多样化、真实的回放：在20种场景类型、5种动作类型和8种推理类型中，共有36,076个示例。我们首先评估了38个前沿的MLLM（例如，GPT-5.4和Qwen3-VL-235B-A22B），发现存在显著且系统的缺陷：即使是最强的模型也远低于人类，且这些失败在模型家族中反复出现，并随着规模的扩大而持续。然后，我们在WOVEN上以多种规模训练MLLM，发现它们学习到了一种广泛转移的共享能力：仅约2,000个项目的训练子集共同提高了26个外部基准中的22个，最多提高27.3个百分点，WOVEN数据可以以可比的准确性替代任务自身训练数据的30-50%。受控比较进一步得出了一种视觉世界建模的训练方案，前瞻性地在保留的基准上进行了验证：根据其教授的推理操作选择监督，而不是根据其展示的动作、场景或领域，并优先考虑对视觉状态的更大变化以增强鲁棒性。我们的工作确立了视觉转移推理作为MLLM中系统视觉世界模型训练的可重用基础。</div>
+</details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">The research addresses the limitations of multimodal large language models (MLLMs) in spatial, embodied, physical, and temporal reasoning, hypothesizing that these issues stem from a lack of visual transition reasoning. To investigate this, the authors introduce WOVEN, a training source and benchmark that organizes visual transition reasoning supervision by scene, action, and reasoning type, utilizing 36,076 examples from video-pretrained generative models. The evaluation of 38 MLLMs reveals significant deficits in reasoning capabilities compared to humans, and subsequent training on WOVEN demonstrates that MLLMs can learn a transferable visual reasoning capability, improving performance on 22 of 26 external benchmarks by up to 27.3 percentage points and allowing for the replacement of a substantial portion of task-specific training data with WOVEN data while maintaining accuracy.</div>
+<div class="mono" style="margin-top:8px">本研究的动机在于解决多模态大语言模型（MLLMs）在空间、具身、物理和时间推理方面的局限性，这些局限性被认为源于视觉转移推理的不足。作者引入了WOVEN，一个训练源和基准，旨在系统地评估和增强不同场景、动作和推理类型的视觉转移推理，利用从视频预训练模型生成的36,076个示例。实验结果显示，38个领先的MLLMs在视觉推理方面与人类表现相比存在显著缺陷，但在WOVEN上训练使这些模型能够提高其能力，在26个外部基准中有22个得分提高了最多27.3个百分点，并且WOVEN数据能够在保持准确性的同时替代任务训练数据的相当一部分。</div>
+</details>
+</div>
+<div class="card">
+<div class="title">WorldCast: Distributed Multiplayer World Models</div>
+<div class="meta-line">Authors: Ziyang Ye, Junchao Huang, Evelyn Zhang, Zhihao Xie, Ruicheng Zhang, Boyao Han, Litao Ban, Ziye Wang, Xinting Hu, Shaoshuai Shi, Zhuotao Tian, Li Jiang</div>
+<div class="meta-line">First: 2026-10-08T17:49:44+00:00 · Latest: 2026-10-08T17:49:44+00:00</div>
+<div class="meta-line">Comments: 31 pages, 19 figures, 20 tables. Project page: https://ziyang-ye.github.io/WorldCast-Page</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.12412v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.12412v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a> · <a href="https://ziyang-ye.github.io/WorldCast-Page">Project1</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">Multiplayer world models must generate independently controlled views with consistent representations of both players and their shared environment. Most existing approaches coordinate multiple players through joint multi-view generation, whose cost grows with each additional player. We present WorldCast, a distributed multiplayer world model in which each player runs a local client comprising a video generator and a state model. Using recorded player positions and map geometry during training, the state model estimates the player&#x27;s position from generated video and control inputs. Clients exchange player states and project them into camera-aligned player state fields that guide where and how other players are rendered. Shared scene state enables clients to reuse one another&#x27;s generated observations to maintain consistent scene appearance across views. Experiments on Counter-Strike 2 demonstrate WorldCast&#x27;s consistency, real-time performance, and distributed scalability. The camera-aligned player state field improves player rendering rates by over an order of magnitude over joint-generation methods, while shared scene state improves visual consistency over whole rounds. Each client runs in real time and exchanges only player and scene states, enabling scalable multiplayer generation without a centralized computational bottleneck. Image quality remains stable over hour-long rollouts.</div></details>
+<details class="detail"><summary>中文标题/摘要</summary>
+<div class="mono"><b>标题：</b>WorldCast：分布式多人世界模型</div>
+<div class="mono" style="margin-top:8px">多人世界模型必须生成独立控制的视图，并对玩家及其共享环境进行一致的表示。现有大多数方法通过联合多视图生成来协调多个玩家，其成本随着每增加一个玩家而增加。我们提出了WorldCast，这是一种分布式多人世界模型，每个玩家运行一个本地客户端，包括视频生成器和状态模型。在训练期间使用记录的玩家位置和地图几何，状态模型根据生成的视频和控制输入估计玩家的位置。客户端交换玩家状态，并将其投影到与相机对齐的玩家状态场中，以指导其他玩家的渲染位置和方式。共享场景状态使客户端能够重用彼此生成的观察，以保持视图之间的一致场景外观。在《反恐精英2》上的实验表明，WorldCast的一致性、实时性能和分布式可扩展性。与联合生成方法相比，相机对齐的玩家状态场将玩家渲染速率提高了一个数量级，而共享场景状态则提高了整个回合的视觉一致性。每个客户端实时运行，仅交换玩家和场景状态，从而实现可扩展的多人生成，而没有集中计算瓶颈。图像质量在长达一小时的回合中保持稳定。</div>
+</details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">The motivation behind this research is to improve the efficiency and consistency of multiplayer world models, which traditionally struggle with scalability as more players are added. The authors introduce WorldCast, a distributed multiplayer world model where each player operates a local client that includes a video generator and a state model, allowing for independent control while maintaining a coherent representation of the environment. Experimental results from Counter-Strike 2 show that WorldCast significantly enhances rendering rates by over ten times compared to joint-generation methods and achieves improved visual consistency across rounds, all while allowing real-time operation and minimizing centralized computational demands.</div>
+<div class="mono" style="margin-top:8px">本研究的动机是开发一种可扩展且高效的多人世界模型，能够为多个玩家生成一致的视图，而不增加与联合多视图生成相关的成本。作者提出了WorldCast，这是一个分布式系统，每个玩家操作一个本地客户端，其中包括视频生成器和状态模型，该模型根据生成的视频和控制输入估计玩家的位置。来自《反恐精英2》的实验结果表明，WorldCast在渲染速率上比传统方法提高了一个数量级，同时在不同玩家视图之间保持视觉一致性，并确保实时性能，而无需集中计算瓶颈。</div>
+</details>
+</div>
+<div class="card">
+<div class="title">Predicting Alignment Generalization with Value Representations</div>
+<div class="meta-line">Authors: Andy Liu, Mehar Bhatia, Karolina Stanczak, Mona Diab, Vered Shwartz, Daniel Fried</div>
+<div class="meta-line">First: 2026-10-08T17:47:26+00:00 · Latest: 2026-10-08T17:47:26+00:00</div>
+<div class="links" style="margin-top:8px"><a href="https://arxiv.org/abs/2610.12410v1">Abs</a> · <a href="https://arxiv.org/pdf/2610.12410v1">PDF</a> · <a href="https://huggingface.co/huggingface">Code1</a> · <a href="https://huggingface.co/docs/hub/spaces">Code2</a></div>
+<details class="detail"><summary>Abstract</summary>
+<div class="mono">LLM developers post-train their models to exhibit prosocial values and behavioral traits, which are enumerated in an alignment target. However, while recent post-training developments have yielded models that score highly on alignment evaluations, training models on sets of narrow behaviors still influences their behavior across unseen contexts and environments in unexpected ways. In this paper, we establish the task of alignment generalization prediction, i.e., predicting how fine-tuning a model to follow a given value changes its behavior across a wide range of held-out values. We conduct a large-scale analysis of alignment generalization effects across 66 values found in modern alignment targets, and benchmark representational techniques on the alignment generalization prediction task. We find that representations based on model activations when applying values in context significantly outperform methods based on textual descriptions of the values. Specifically, the best activations-based methods achieve correlations of 0.45 with our generalization matrix, compared with 0.05 from description-based baselines. We then show the applicability of representations that predict alignment generalization toward downstream tasks by using them to measure how similar the values in a multi-value alignment target are, which we find is significantly correlated with model robustness. Finally, we show initial evidence towards a shared, model-independent value space, which we use to develop the first taxonomy of LLM values grounded in empirical generalization dynamics. Our work demonstrates the importance of studying value generalization in LLMs and its application toward the more empirical design and training of model behavior.</div></details>
+<details class="detail"><summary>中文标题/摘要</summary>
+<div class="mono"><b>标题：</b>基于价值表征的对齐泛化预测</div>
+<div class="mono" style="margin-top:8px">大型语言模型（LLM）开发者对其模型进行后训练，以展现亲社会价值观和行为特征，这些特征在对齐目标中列举。然而，尽管最近的后训练发展使模型在对齐评估中得分很高，但在狭窄行为集上训练模型仍会以意想不到的方式影响其在未见上下文和环境中的行为。本文确立了对齐泛化预测的任务，即预测将模型微调以遵循给定价值如何改变其在广泛保留价值中的行为。我们对现代对齐目标中发现的66个价值进行了大规模的对齐泛化效应分析，并在对齐泛化预测任务上基准化了表征技术。我们发现，在上下文中应用价值时基于模型激活的表征显著优于基于价值文本描述的方法。具体而言，基于激活的最佳方法与我们的泛化矩阵的相关性达到0.45，而基于描述的基线仅为0.05。然后，我们展示了预测对齐泛化的表征在下游任务中的适用性，通过使用它们来测量多价值对齐目标中价值的相似性，我们发现这与模型的鲁棒性显著相关。最后，我们展示了初步证据，支持一个共享的、模型无关的价值空间，我们利用该空间开发了第一个基于经验泛化动态的LLM价值分类法。我们的工作展示了研究LLM中的价值泛化及其在模型行为的更实证设计和训练中的应用的重要性。</div>
+</details>
+<details class="detail"><summary>Summary / 总结</summary>
+<div class="mono">The motivation behind this research is to understand how fine-tuning large language models (LLMs) to exhibit specific prosocial values affects their behavior in diverse contexts. The authors establish the task of predicting alignment generalization, which involves analyzing how training on certain values influences behavior across a range of untrained values. Through a large-scale analysis of 66 values, they find that model activation-based representations significantly outperform textual description-based methods in predicting alignment generalization, achieving a correlation of 0.45 compared to 0.05 for the latter. Additionally, they demonstrate that these representations can be applied to measure the similarity of values in multi-value alignment targets, revealing a correlation with model robustness, and provide initial evidence for a shared value space that informs a new taxonomy of LLM values based on empirical generalization dynamics.</div>
+<div class="mono" style="margin-top:8px">本研究的动机在于理解将大型语言模型（LLMs）微调为表现特定的亲社会价值观如何影响其在各种未见上下文中的行为。作者建立了预测对齐泛化的任务，分析在某些价值观上训练如何影响模型在更广泛价值观上的行为。通过对66个价值观的大规模分析，他们发现使用模型激活来表示价值观显著优于文本描述，达到与泛化矩阵的相关性为0.45，而描述基础方法仅为0.05。此外，他们展示了这些表示可以预测对齐泛化，并与模型的鲁棒性相关，从而基于经验泛化动态开发了LLM价值观的分类法。</div>
+</details>
+</div></div>
+    <details style="margin-top:16px" class="detail"><summary>History</summary>
+      <div class="history-list"><a href="archive/20261011_0625.html">20261011_0625</a>
+<a href="archive/20261010_0712.html">20261010_0712</a>
+<a href="archive/20261009_0749.html">20261009_0749</a>
+<a href="archive/20261008_0737.html">20261008_0737</a>
+<a href="archive/20261007_0704.html">20261007_0704</a>
+<a href="archive/20261006_0850.html">20261006_0850</a>
+<a href="archive/20261005_0622.html">20261005_0622</a>
+<a href="archive/20261004_0610.html">20261004_0610</a>
+<a href="archive/20261003_0702.html">20261003_0702</a>
+<a href="archive/20261002_0712.html">20261002_0712</a>
+<a href="archive/20261001_0700.html">20261001_0700</a>
+<a href="archive/20260930_0659.html">20260930_0659</a>
+<a href="archive/20260929_0752.html">20260929_0752</a>
+<a href="archive/20260928_0600.html">20260928_0600</a>
+<a href="archive/20260927_0600.html">20260927_0600</a>
+<a href="archive/20260926_0611.html">20260926_0611</a>
+<a href="archive/20260925_0614.html">20260925_0614</a>
+<a href="archive/20260924_0615.html">20260924_0615</a>
+<a href="archive/20260923_0600.html">20260923_0600</a>
+<a href="archive/20260922_0638.html">20260922_0638</a>
+<a href="archive/20260921_0524.html">20260921_0524</a>
+<a href="archive/20260920_0528.html">20260920_0528</a>
+<a href="archive/20260919_0539.html">20260919_0539</a>
+<a href="archive/20260918_0608.html">20260918_0608</a>
+<a href="archive/20260917_0604.html">20260917_0604</a>
+<a href="archive/20260916_0607.html">20260916_0607</a>
+<a href="archive/20260915_0631.html">20260915_0631</a>
+<a href="archive/20260913_0525.html">20260913_0525</a>
+<a href="archive/20260912_0543.html">20260912_0543</a>
+<a href="archive/20260911_0536.html">20260911_0536</a>
+<a href="archive/20260910_0618.html">20260910_0618</a>
+<a href="archive/20260909_0550.html">20260909_0550</a>
+<a href="archive/20260908_0603.html">20260908_0603</a>
+<a href="archive/20260907_0514.html">20260907_0514</a>
+<a href="archive/20260906_0506.html">20260906_0506</a>
+<a href="archive/20260905_0526.html">20260905_0526</a>
+<a href="archive/20260904_0544.html">20260904_0544</a>
+<a href="archive/20260903_0546.html">20260903_0546</a>
+<a href="archive/20260902_0547.html">20260902_0547</a>
+<a href="archive/20260901_0716.html">20260901_0716</a>
+<a href="archive/20260831_0558.html">20260831_0558</a>
+<a href="archive/20260830_0541.html">20260830_0541</a>
+<a href="archive/20260829_1011.html">20260829_1011</a>
+<a href="archive/20260828_1038.html">20260828_1038</a>
+<a href="archive/20260827_0550.html">20260827_0550</a>
+<a href="archive/20260826_0342.html">20260826_0342</a>
+<a href="archive/20260825_0340.html">20260825_0340</a>
+<a href="archive/20260824_0331.html">20260824_0331</a>
+<a href="archive/20260823_0332.html">20260823_0332</a>
+<a href="archive/20260822_0337.html">20260822_0337</a>
+<a href="archive/20260821_0342.html">20260821_0342</a>
+<a href="archive/20260820_0339.html">20260820_0339</a>
+<a href="archive/20260819_0339.html">20260819_0339</a>
+<a href="archive/20260818_0339.html">20260818_0339</a>
+<a href="archive/20260817_0330.html">20260817_0330</a>
+<a href="archive/20260816_0330.html">20260816_0330</a>
+<a href="archive/20260815_0357.html">20260815_0357</a>
+<a href="archive/20260814_0404.html">20260814_0404</a>
+<a href="archive/20260813_0409.html">20260813_0409</a>
+<a href="archive/20260812_0412.html">20260812_0412</a>
+<a href="archive/20260811_0403.html">20260811_0403</a>
+<a href="archive/20260810_0343.html">20260810_0343</a>
+<a href="archive/20260809_0340.html">20260809_0340</a>
+<a href="archive/20260808_0400.html">20260808_0400</a>
+<a href="archive/20260807_0849.html">20260807_0849</a>
+<a href="archive/20260806_0442.html">20260806_0442</a>
+<a href="archive/20260805_0434.html">20260805_0434</a>
+<a href="archive/20260804_0435.html">20260804_0435</a>
+<a href="archive/20260803_0418.html">20260803_0418</a>
+<a href="archive/20260802_0418.html">20260802_0418</a>
+<a href="archive/20260801_0429.html">20260801_0429</a>
+<a href="archive/20260731_0423.html">20260731_0423</a>
+<a href="archive/20260730_0420.html">20260730_0420</a>
+<a href="archive/20260729_0426.html">20260729_0426</a>
+<a href="archive/20260728_0431.html">20260728_0431</a>
+<a href="archive/20260727_0417.html">20260727_0417</a>
+<a href="archive/20260726_0418.html">20260726_0418</a>
+<a href="archive/20260725_0430.html">20260725_0430</a>
+<a href="archive/20260724_0423.html">20260724_0423</a>
+<a href="archive/20260723_0421.html">20260723_0421</a>
+<a href="archive/20260722_0427.html">20260722_0427</a>
+<a href="archive/20260721_0431.html">20260721_0431</a>
+<a href="archive/20260720_0414.html">20260720_0414</a>
+<a href="archive/20260719_0411.html">20260719_0411</a>
+<a href="archive/20260718_0416.html">20260718_0416</a>
+<a href="archive/20260717_0412.html">20260717_0412</a>
+<a href="archive/20260716_0422.html">20260716_0422</a>
+<a href="archive/20260715_0426.html">20260715_0426</a>
+<a href="archive/20260714_0427.html">20260714_0427</a>
+<a href="archive/20260713_0414.html">20260713_0414</a>
+<a href="archive/20260712_0414.html">20260712_0414</a>
+<a href="archive/20260711_0429.html">20260711_0429</a>
+<a href="archive/20260710_0458.html">20260710_0458</a>
+<a href="archive/20260709_0431.html">20260709_0431</a>
+<a href="archive/20260708_0459.html">20260708_0459</a>
+<a href="archive/20260707_0501.html">20260707_0501</a>
+<a href="archive/20260706_0422.html">20260706_0422</a>
+<a href="archive/20260705_0418.html">20260705_0418</a>
+<a href="archive/20260704_0424.html">20260704_0424</a>
+<a href="archive/20260703_0430.html">20260703_0430</a>
+<a href="archive/20260702_0457.html">20260702_0457</a>
+<a href="archive/20260701_0507.html">20260701_0507</a>
+<a href="archive/20260630_0459.html">20260630_0459</a>
+<a href="archive/20260629_0422.html">20260629_0422</a>
+<a href="archive/20260627_0500.html">20260627_0500</a>
+<a href="archive/20260626_0510.html">20260626_0510</a>
+<a href="archive/20260625_0457.html">20260625_0457</a>
+<a href="archive/20260624_0510.html">20260624_0510</a>
+<a href="archive/20260623_0540.html">20260623_0540</a>
+<a href="archive/20260622_0432.html">20260622_0432</a>
+<a href="archive/20260621_0424.html">20260621_0424</a>
+<a href="archive/20260620_0453.html">20260620_0453</a>
+<a href="archive/20260619_0529.html">20260619_0529</a>
+<a href="archive/20260618_0517.html">20260618_0517</a>
+<a href="archive/20260617_0548.html">20260617_0548</a>
+<a href="archive/20260616_0552.html">20260616_0552</a>
+<a href="archive/20260615_0425.html">20260615_0425</a>
+<a href="archive/20260614_0424.html">20260614_0424</a>
+<a href="archive/20260612_0532.html">20260612_0532</a>
+<a href="archive/20260611_0532.html">20260611_0532</a>
+<a href="archive/20260610_0508.html">20260610_0508</a>
+<a href="archive/20260609_0517.html">20260609_0517</a>
+<a href="archive/20260608_0420.html">20260608_0420</a>
+<a href="archive/20260607_0417.html">20260607_0417</a>
+<a href="archive/20260606_0454.html">20260606_0454</a>
+<a href="archive/20260604_0558.html">20260604_0558</a>
+<a href="archive/20260603_0557.html">20260603_0557</a>
+<a href="archive/20260602_0620.html">20260602_0620</a>
+<a href="archive/20260601_0420.html">20260601_0420</a>
+<a href="archive/20260531_0416.html">20260531_0416</a>
+<a href="archive/20260530_0517.html">20260530_0517</a>
+<a href="archive/20260529_0521.html">20260529_0521</a>
+<a href="archive/20260528_0527.html">20260528_0527</a>
+<a href="archive/20260527_0519.html">20260527_0519</a>
+<a href="archive/20260526_0434.html">20260526_0434</a>
+<a href="archive/20260523_0458.html">20260523_0458</a>
+<a href="archive/20260522_0500.html">20260522_0500</a>
+<a href="archive/20260520_0452.html">20260520_0452</a>
+<a href="archive/20260519_0433.html">20260519_0433</a>
+<a href="archive/20260518_0411.html">20260518_0411</a>
+<a href="archive/20260517_0407.html">20260517_0407</a>
+<a href="archive/20260516_0424.html">20260516_0424</a>
+<a href="archive/20260515_0444.html">20260515_0444</a>
+<a href="archive/20260514_0453.html">20260514_0453</a>
+<a href="archive/20260513_0448.html">20260513_0448</a>
+<a href="archive/20260512_0453.html">20260512_0453</a>
+<a href="archive/20260511_0405.html">20260511_0405</a>
+<a href="archive/20260510_0404.html">20260510_0404</a>
+<a href="archive/20260509_0414.html">20260509_0414</a>
+<a href="archive/20260507_0432.html">20260507_0432</a>
+<a href="archive/20260506_0417.html">20260506_0417</a>
+<a href="archive/20260505_0429.html">20260505_0429</a>
+<a href="archive/20260504_0401.html">20260504_0401</a>
+<a href="archive/20260503_0400.html">20260503_0400</a>
+<a href="archive/20260502_0414.html">20260502_0414</a>
+<a href="archive/20260501_0422.html">20260501_0422</a>
+<a href="archive/20260430_0420.html">20260430_0420</a>
+<a href="archive/20260429_0426.html">20260429_0426</a>
+<a href="archive/20260428_0417.html">20260428_0417</a>
+<a href="archive/20260427_0354.html">20260427_0354</a>
+<a href="archive/20260426_0352.html">20260426_0352</a>
+<a href="archive/20260425_0400.html">20260425_0400</a>
+<a href="archive/20260424_0414.html">20260424_0414</a>
+<a href="archive/20260423_0414.html">20260423_0414</a>
+<a href="archive/20260422_0412.html">20260422_0412</a>
+<a href="archive/20260421_0407.html">20260421_0407</a>
+<a href="archive/20260420_0348.html">20260420_0348</a>
+<a href="archive/20260419_0347.html">20260419_0347</a>
+<a href="archive/20260418_0405.html">20260418_0405</a>
+<a href="archive/20260417_0408.html">20260417_0408</a>
+<a href="archive/20260416_0412.html">20260416_0412</a>
+<a href="archive/20260415_0414.html">20260415_0414</a>
+<a href="archive/20260414_0414.html">20260414_0414</a>
+<a href="archive/20260413_0346.html">20260413_0346</a>
+<a href="archive/20260412_0343.html">20260412_0343</a>
+<a href="archive/20260411_0353.html">20260411_0353</a>
+<a href="archive/20260410_0410.html">20260410_0410</a>
+<a href="archive/20260409_0406.html">20260409_0406</a>
+<a href="archive/20260408_0408.html">20260408_0408</a>
+<a href="archive/20260407_0400.html">20260407_0400</a>
+<a href="archive/20260406_0342.html">20260406_0342</a>
+<a href="archive/20260405_0341.html">20260405_0341</a>
+<a href="archive/20260403_0358.html">20260403_0358</a>
+<a href="archive/20260401_0403.html">20260401_0403</a>
+<a href="archive/20260331_0409.html">20260331_0409</a>
+<a href="archive/20260328_0347.html">20260328_0347</a>
+<a href="archive/20260326_0355.html">20260326_0355</a>
+<a href="archive/20260325_0359.html">20260325_0359</a>
+<a href="archive/20260324_0359.html">20260324_0359</a>
+<a href="archive/20260323_0336.html">20260323_0336</a>
+<a href="archive/20260322_0334.html">20260322_0334</a>
+<a href="archive/20260321_0344.html">20260321_0344</a>
+<a href="archive/20260320_0357.html">20260320_0357</a>
+<a href="archive/20260319_0401.html">20260319_0401</a>
+<a href="archive/20260318_0401.html">20260318_0401</a>
+<a href="archive/20260317_0439.html">20260317_0439</a>
+<a href="archive/20260316_0337.html">20260316_0337</a>
+<a href="archive/20260315_0336.html">20260315_0336</a>
+<a href="archive/20260314_0340.html">20260314_0340</a>
+<a href="archive/20260313_0350.html">20260313_0350</a>
+<a href="archive/20260312_0349.html">20260312_0349</a>
+<a href="archive/20260311_0347.html">20260311_0347</a>
+<a href="archive/20260310_0348.html">20260310_0348</a>
+<a href="archive/20260309_0333.html">20260309_0333</a>
+<a href="archive/20260308_0330.html">20260308_0330</a>
+<a href="archive/20260307_0342.html">20260307_0342</a>
+<a href="archive/20260306_0402.html">20260306_0402</a>
+<a href="archive/20260305_0348.html">20260305_0348</a>
+<a href="archive/20260304_0349.html">20260304_0349</a>
+<a href="archive/20260303_0346.html">20260303_0346</a>
+<a href="archive/20260302_0332.html">20260302_0332</a>
+<a href="archive/20260301_0330.html">20260301_0330</a>
+<a href="archive/20260228_0344.html">20260228_0344</a>
+<a href="archive/20260227_0352.html">20260227_0352</a>
+<a href="archive/20260226_0358.html">20260226_0358</a>
+<a href="archive/20260225_0400.html">20260225_0400</a>
+<a href="archive/20260224_0405.html">20260224_0405</a>
+<a href="archive/20260223_0335.html">20260223_0335</a>
+<a href="archive/20260222_0334.html">20260222_0334</a>
+<a href="archive/20260221_0345.html">20260221_0345</a>
+<a href="archive/20260220_0348.html">20260220_0348</a>
+<a href="archive/20260219_0357.html">20260219_0357</a>
+<a href="archive/20260218_0356.html">20260218_0356</a>
+<a href="archive/20260217_0341.html">20260217_0341</a>
+<a href="archive/20260216_0336.html">20260216_0336</a>
+<a href="archive/20260215_0334.html">20260215_0334</a>
+<a href="archive/20260213_0357.html">20260213_0357</a>
+<a href="archive/20260212_0403.html">20260212_0403</a>
+<a href="archive/20260210_0412.html">20260210_0412</a>
+<a href="archive/20260208_0334.html">20260208_0334</a>
+<a href="archive/20260207_0346.html">20260207_0346</a>
+<a href="archive/20260206_0346.html">20260206_0346</a>
+<a href="archive/20260205_0348.html">20260205_0348</a>
+<a href="archive/20260204_0354.html">20260204_0354</a>
+<a href="archive/20260203_1224.html">20260203_1224</a>
+<a href="archive/20260202_0334.html">20260202_0334</a>
+<a href="archive/20260201_0330.html">20260201_0330</a>
+<a href="archive/20260131_0342.html">20260131_0342</a>
+<a href="archive/20260130_0342.html">20260130_0342</a>
+<a href="archive/20260129_0342.html">20260129_0342</a>
+<a href="archive/20260128_0340.html">20260128_0340</a>
+<a href="archive/20260127_0335.html">20260127_0335</a>
+<a href="archive/20260126_0328.html">20260126_0328</a>
+<a href="archive/20260125_0326.html">20260125_0326</a>
+<a href="archive/20260124_0335.html">20260124_0335</a>
+<a href="archive/20260123_0336.html">20260123_0336</a>
+<a href="archive/20260122_0339.html">20260122_0339</a>
+<a href="archive/20260121_0422.html">20260121_0422</a>
+<a href="archive/20260120_0330.html">20260120_0330</a>
+<a href="archive/20260119_0325.html">20260119_0325</a>
+<a href="archive/20260118_0325.html">20260118_0325</a>
+<a href="archive/20260117_0329.html">20260117_0329</a>
+<a href="archive/20260116_0336.html">20260116_0336</a>
+<a href="archive/20260115_0332.html">20260115_0332</a>
+<a href="archive/20260114_0332.html">20260114_0332</a>
+<a href="archive/20260113_0331.html">20260113_0331</a>
+<a href="archive/20260112_0325.html">20260112_0325</a>
+<a href="archive/20260111_0325.html">20260111_0325</a>
+<a href="archive/20260110_0330.html">20260110_0330</a>
+<a href="archive/20260109_0330.html">20260109_0330</a>
+<a href="archive/20260108_0332.html">20260108_0332</a>
+<a href="archive/20260107_0328.html">20260107_0328</a>
+<a href="archive/20260106_1857.html">20260106_1857</a>
+<a href="archive/20260106_1846.html">20260106_1846</a>
+<a href="archive/20260106_0330.html">20260106_0330</a>
+<a href="archive/20260105_0325.html">20260105_0325</a>
+<a href="archive/20260104_2229.html">20260104_2229</a>
+<a href="archive/20260104_0328.html">20260104_0328</a>
+<a href="archive/20260103_0325.html">20260103_0325</a>
+<a href="archive/20260102_0339.html">20260102_0339</a>
+<a href="archive/20260101_0329.html">20260101_0329</a>
+<a href="archive/20251231_0333.html">20251231_0333</a>
+<a href="archive/20251230_0332.html">20251230_0332</a>
+<a href="archive/20251229_0329.html">20251229_0329</a>
+<a href="archive/20251228_0332.html">20251228_0332</a>
+<a href="archive/20251227_0329.html">20251227_0329</a>
+<a href="archive/20251226_0330.html">20251226_0330</a>
+<a href="archive/20251225_0329.html">20251225_0329</a>
+<a href="archive/20251224_0331.html">20251224_0331</a>
+<a href="archive/20251223_0332.html">20251223_0332</a>
+<a href="archive/20251222_0328.html">20251222_0328</a>
+<a href="archive/20251221_0329.html">20251221_0329</a>
+<a href="archive/20251220_0330.html">20251220_0330</a>
+<a href="archive/20251219_0330.html">20251219_0330</a>
+<a href="archive/20251218_0345.html">20251218_0345</a>
+<a href="archive/20251217_0332.html">20251217_0332</a>
+<a href="archive/20251216_0333.html">20251216_0333</a>
+<a href="archive/20251215_0333.html">20251215_0333</a>
+<a href="archive/20251214_0327.html">20251214_0327</a>
+<a href="archive/20251212_0333.html">20251212_0333</a>
+<a href="archive/20251211_0331.html">20251211_0331</a>
+<a href="archive/20251210_0332.html">20251210_0332</a>
+<a href="archive/20251209_0331.html">20251209_0331</a>
+<a href="archive/20251208_0328.html">20251208_0328</a>
+<a href="archive/20251207_0327.html">20251207_0327</a>
+<a href="archive/20251206_0330.html">20251206_0330</a>
+<a href="archive/20251205_0331.html">20251205_0331</a>
+<a href="archive/20251204_0331.html">20251204_0331</a>
+<a href="archive/20251203_0333.html">20251203_0333</a>
+<a href="archive/20251202_0335.html">20251202_0335</a>
+<a href="archive/20251201_0328.html">20251201_0328</a>
+<a href="archive/20251130_0327.html">20251130_0327</a>
+<a href="archive/20251129_0328.html">20251129_0328</a>
+<a href="archive/20251128_0327.html">20251128_0327</a>
+<a href="archive/20251127_0327.html">20251127_0327</a>
+<a href="archive/20251126_0329.html">20251126_0329</a>
+<a href="archive/20251125_0327.html">20251125_0327</a>
+<a href="archive/20251124_0327.html">20251124_0327</a>
+<a href="archive/20251123_0326.html">20251123_0326</a>
+<a href="archive/20251122_0328.html">20251122_0328</a>
+<a href="archive/20251121_0328.html">20251121_0328</a>
+<a href="archive/20251120_0329.html">20251120_0329</a>
+<a href="archive/20251119_0328.html">20251119_0328</a>
+<a href="archive/20251118_0328.html">20251118_0328</a>
+<a href="archive/20251117_0326.html">20251117_0326</a>
+<a href="archive/20251116_0325.html">20251116_0325</a>
+<a href="archive/20251115_0327.html">20251115_0327</a>
+<a href="archive/20251114_0328.html">20251114_0328</a>
+<a href="archive/20251113_0330.html">20251113_0330</a>
+<a href="archive/20251112_0329.html">20251112_0329</a>
+<a href="archive/20251111_0328.html">20251111_0328</a>
+<a href="archive/20251110_0325.html">20251110_0325</a>
+<a href="archive/20251109_0326.html">20251109_0326</a>
+<a href="archive/20251108_0328.html">20251108_0328</a>
+<a href="archive/20251107_0328.html">20251107_0328</a>
+<a href="archive/20251106_0329.html">20251106_0329</a>
+<a href="archive/20251105_0326.html">20251105_0326</a>
+<a href="archive/20251104_0327.html">20251104_0327</a>
+<a href="archive/20251103_0324.html">20251103_0324</a>
+<a href="archive/20251102_0326.html">20251102_0326</a>
+<a href="archive/20251101_0324.html">20251101_0324</a>
+<a href="archive/20251031_0328.html">20251031_0328</a>
+<a href="archive/20251030_0330.html">20251030_0330</a>
+<a href="archive/20251029_0329.html">20251029_0329</a>
+<a href="archive/20251028_0329.html">20251028_0329</a>
+<a href="archive/20251027_0322.html">20251027_0322</a>
+<a href="archive/20251026_0327.html">20251026_0327</a>
+<a href="archive/20251025_0331.html">20251025_0331</a>
+<a href="archive/20251024_0329.html">20251024_0329</a>
+<a href="archive/20251023_0329.html">20251023_0329</a>
+<a href="archive/20251022_0330.html">20251022_0330</a>
+<a href="archive/20251021_0331.html">20251021_0331</a>
+<a href="archive/20251020_0328.html">20251020_0328</a>
+<a href="archive/20251019_0321.html">20251019_0321</a>
+<a href="archive/20251018_0327.html">20251018_0327</a>
+<a href="archive/20251017_0320.html">20251017_0320</a>
+<a href="archive/20251016_0328.html">20251016_0328</a>
+<a href="archive/20251015_0328.html">20251015_0328</a>
+<a href="archive/20251014_0323.html">20251014_0323</a>
+<a href="archive/20251011_0328.html">20251011_0328</a>
+<a href="archive/20251010_0330.html">20251010_0330</a>
+<a href="archive/20251009_0321.html">20251009_0321</a>
+<a href="archive/20251008_0343.html">20251008_0343</a>
+<a href="archive/20251007_0353.html">20251007_0353</a>
+<a href="archive/20251006_0325.html">20251006_0325</a>
+<a href="archive/20251005_0350.html">20251005_0350</a>
+<a href="archive/20251004_0352.html">20251004_0352</a>
+<a href="archive/20251003_0352.html">20251003_0352</a>
+<a href="archive/20251002_0356.html">20251002_0356</a>
+<a href="archive/20251001_0321.html">20251001_0321</a>
+<a href="archive/20250925_0335.html">20250925_0335</a>
+<a href="archive/20250924_0350.html">20250924_0350</a>
+<a href="archive/20250923_0348.html">20250923_0348</a>
+<a href="archive/20250922_0346.html">20250922_0346</a>
+<a href="archive/20250921_0345.html">20250921_0345</a>
+<a href="archive/20250920_0342.html">20250920_0342</a>
+<a href="archive/20250919_0346.html">20250919_0346</a>
+<a href="archive/20250918_0342.html">20250918_0342</a>
+<a href="archive/20250917_0336.html">20250917_0336</a>
+<a href="archive/20250916_0333.html">20250916_0333</a>
+<a href="archive/20250915_0333.html">20250915_0333</a>
+<a href="archive/20250914_0328.html">20250914_0328</a>
+<a href="archive/20250913_0322.html">20250913_0322</a>
+<a href="archive/20250912_0335.html">20250912_0335</a>
+<a href="archive/20250911_0337.html">20250911_0337</a>
+<a href="archive/20250910_0338.html">20250910_0338</a>
+<a href="archive/20250909_0341.html">20250909_0341</a>
+<a href="archive/20250908_0342.html">20250908_0342</a>
+<a href="archive/20250907_0333.html">20250907_0333</a>
+<a href="archive/20250906_0350.html">20250906_0350</a>
+<a href="archive/20250905_0319.html">20250905_0319</a>
+<a href="archive/20250904_0323.html">20250904_0323</a>
+<a href="archive/20250903_0355.html">20250903_0355</a>
+<a href="archive/20250902_0325.html">20250902_0325</a>
+<a href="archive/20250901_0355.html">20250901_0355</a>
+<a href="archive/20250831_0355.html">20250831_0355</a>
+<a href="archive/20250830_0356.html">20250830_0356</a>
+<a href="archive/20250829_0355.html">20250829_0355</a>
+<a href="archive/20250828_0333.html">20250828_0333</a>
+<a href="archive/20250827_1654.html">20250827_1654</a>
+<a href="archive/20250827_1602.html">20250827_1602</a>
+<a href="archive/20250827_1557.html">20250827_1557</a>
+<a href="archive/20250827_0320.html">20250827_0320</a>
+<a href="archive/20250826_0320.html">20250826_0320</a>
+<a href="archive/20250825_1752.html">20250825_1752</a>
+<a href="archive/20250825_1709.html">20250825_1709</a>
+<a href="archive/20250825_1652.html">20250825_1652</a>
+<a href="archive/20250825_1647.html">20250825_1647</a>
+<a href="archive/20250825_1645.html">20250825_1645</a>
+<a href="archive/20250825_1631.html">20250825_1631</a>
+<a href="archive/20250825_1606.html">20250825_1606</a>
+<a href="archive/20250825_1559.html">20250825_1559</a>
+<a href="archive/20250825_1558.html">20250825_1558</a>
+<a href="archive/20250825_1556.html">20250825_1556</a>
+<a href="archive/20250825_1531.html">20250825_1531</a>
+<a href="archive/20250825_1525.html">20250825_1525</a>
+<a href="archive/20250825_1516.html">20250825_1516</a>
+<a href="archive/20250825_1450.html">20250825_1450</a>
+<a href="archive/20250825_1444.html">20250825_1444</a>
+<a href="archive/20250825_1438.html">20250825_1438</a>
+<a href="archive/20250825_1414.html">20250825_1414</a>
+<a href="archive/20250825_1413.html">20250825_1413</a>
+<a href="archive/20250825_1410.html">20250825_1410</a>
+<a href="archive/20250825_1408.html">20250825_1408</a>
+<a href="archive/20250825_1405.html">20250825_1405</a>
+<a href="archive/20250825_1401.html">20250825_1401</a>
+<a href="archive/20250825_1355.html">20250825_1355</a>
+<a href="archive/20250825_1347.html">20250825_1347</a>
+<a href="archive/20250825_1345.html">20250825_1345</a>
+<a href="archive/20250825_1344.html">20250825_1344</a>
+<a href="archive/20250825_1343.html">20250825_1343</a>
+<a href="archive/20250825_1340.html">20250825_1340</a>
+<a href="archive/20250825_1339.html">20250825_1339</a>
+<a href="archive/20250825_1333.html">20250825_1333</a>
+<a href="archive/20250825_1323.html">20250825_1323</a>
+<a href="archive/20250825_1317.html">20250825_1317</a>
+<a href="archive/20250825_1243.html">20250825_1243</a>
+<a href="archive/20250824_0342.html">20250824_0342</a>
+<a href="archive/20250823_0343.html">20250823_0343</a>
+<a href="archive/20250823_0142.html">20250823_0142</a>
+<a href="archive/20250822_2331.html">20250822_2331</a>
+<a href="archive/20250822_2308.html">20250822_2308</a>
+<a href="archive/20250822_2258.html">20250822_2258</a>
+<a href="archive/20250822_2241.html">20250822_2241</a>
+<a href="archive/20250822_2228.html">20250822_2228</a>
+<a href="archive/20250822_2206.html">20250822_2206</a>
+<a href="archive/20250822_2147.html">20250822_2147</a>
+<a href="archive/20250822_2111.html">20250822_2111</a>
+<a href="archive/20250822_1259.html">20250822_1259</a>
+<a href="archive/20250822_1233.html">20250822_1233</a>
+<a href="archive/20250822_1229.html">20250822_1229</a>
+<a href="archive/20250822_1223.html">20250822_1223</a>
+<a href="archive/20250822_1210.html">20250822_1210</a>
+<a href="archive/20250822_1201.html">20250822_1201</a>
+<a href="archive/20250822_1111.html">20250822_1111</a>
+<a href="archive/20250822_1058.html">20250822_1058</a>
+<a href="archive/20250822_1052.html">20250822_1052</a>
+<a href="archive/20250822_1045.html">20250822_1045</a>
+<a href="archive/20250822_0657.html">20250822_0657</a>
+<a href="archive/20250822_0553.html">20250822_0553</a></div>
+    </details>
+    <div class="footer">Generated by arxiv-tracker</div>
+  </div>
+</body></html>
